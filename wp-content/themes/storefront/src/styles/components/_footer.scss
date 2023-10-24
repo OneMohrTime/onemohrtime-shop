@@ -4,11 +4,13 @@
 
 .c-footer {
 	position: relative;
+	padding-top: $gutter;
 
 	@include media(">=screen768", "<screen1024") {
 		display: flex;
 		flex-wrap: wrap;
 		column-gap: 2em;
+		padding-top: 0;
 	}
 
 	@include media(">=screen1024") {
@@ -22,6 +24,7 @@
 			"legal about about about about";
 		align-items: start;
 		column-gap: 2em;
+		padding-top: 0;
 	}
 }
 
@@ -67,20 +70,14 @@
 		left: auto;
 		transform: none;
 		text-align: center;
+		border-radius: 0;
+		background-color: transparent;
+		box-shadow: none;
 	}
 }
 
 .c-footer__legal {
 	text-align: center;
-
-	@include media(">=screen768", "<screen1024") {
-		flex-basis: 100%;
-		max-width: 100%;
-	}
-
-	@include media(">=screen1024") {
-		grid-area: legal;
-	}
 
 	ul {
 		display: flex;
@@ -95,8 +92,25 @@
 		margin: 1.5em auto;
 	}
 
-	.c-media__image {
+	.c-media--macintosh {
+		max-width: 220px;
 		margin: 1.5em auto 2.5em;
+		padding: 3px 7px 2px;
+		border-radius: 18px;
+		background-color: $white;
+	}
+
+	@include media(">=screen768", "<screen1024") {
+		flex-basis: 100%;
+		max-width: 100%;
+	}
+
+	@include media(">=screen1024") {
+		grid-area: legal;
+
+		.c-media--macintosh {
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -153,8 +167,7 @@
 		overflow: hidden;
 
 		@include media(">=screen600") {
-			margin-right: 5px;
-			margin-bottom: 14px;
+			margin: 14px 0 0;
 		}
 
 		span {

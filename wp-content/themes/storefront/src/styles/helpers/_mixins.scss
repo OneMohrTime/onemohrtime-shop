@@ -474,7 +474,7 @@
 			width: 100%;
 			height: 100%;
 			overflow: hidden;
-			background: transparent url("/assets/img/img-texture.png") repeat center center;
+			background: transparent url("/wp-content/themes/onemohrtime/assets/img/img-texture.png") repeat center center;
 			background-blend-mode: multiply;
 			z-index: 1;
 		}
@@ -482,8 +482,8 @@
 }
 
 @mixin mask-texture() {
-	-webkit-mask-image: url("/assets/img/rough-texture.png");
-			mask-image: url("/assets/img/rough-texture.png");
+	-webkit-mask-image: url("/wp-content/themes/onemohrtime/assets/img/rough-texture.png");
+			mask-image: url("/wp-content/themes/onemohrtime/assets/img/rough-texture.png");
 }
 
 /**
@@ -591,7 +591,6 @@
 		top: 50%;
 		right: $base-spacing;
 		transform: rotate(-90deg) translateY(-50%) !important;
-		// transform: rotate(-90deg) !important;
 		transform-origin: center top 0;
 		z-index: 2;
 	}
@@ -611,6 +610,6 @@
 	}
 
 	@include media(">=screen1440") {
-		transform: rotate(-90deg) translateY(-150%) !important;
+		transform: rotate(-90deg) translateY(-200%) !important;
 	}
 }
