@@ -1,0 +1,75 @@
+/* ==========================================================================
+	User Account
+========================================================================== */
+
+.woocommerce-MyAccount-navigation {
+	ul {
+		border-top-color: $gray;
+		li {
+			border-bottom-color: $gray;
+		}
+	}
+}
+
+.woocommerce-MyAccount-navigation-link {
+	a {
+		color: $black;
+	}
+	&.is-active {
+		font-weight: 700;
+	}
+}
+
+.woocommerce-MyAccount-content {
+
+	.woocommerce-Address-title {
+		h3 {
+			font-weight: 800;
+		}
+	}
+
+	.woocommerce-Button.button {
+		@include btn-style();
+		background-color: transparent
+	}
+
+	.woocommerce-info,
+	.woocommerce-noreviews,
+	.woocommerce-message,
+	.woocommerce-error,
+	p.no-comments {
+		.woocommerce-Button.button {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+	}
+	.woocommerce-info,
+	.woocommerce-noreviews,
+	p.no-comments {
+		.woocommerce-Button.button {
+			&::before {
+				background-color: $gray--dark;
+			}
+		}
+	}
+	.woocommerce-message {
+		.woocommerce-Button.button {
+			&::before {
+				background-color: $yellow--dark;
+			}
+		}
+	}
+	.woocommerce-error {
+		.woocommerce-Button.button {
+			&::before {
+				background-color: shade($red, 25%);
+			}
+		}
+	}
+
+	a {
+		@include inline-block();
+		text-decoration: none !important;
+	}
+}

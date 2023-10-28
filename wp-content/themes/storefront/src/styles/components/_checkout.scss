@@ -1,0 +1,87 @@
+/* ==========================================================================
+	Checkout
+========================================================================== */
+
+.woocommerce-checkout.checkout {
+
+	h3,
+	#ship-to-different-address label {
+		font-weight: 800;
+	}
+
+	.form-row {
+		label {
+			font-weight: 700;
+		}
+	}
+
+	.required {
+		padding: 0;
+		text-decoration: none;
+		background-color: transparent;
+	}
+
+	[type=color], [type=date], [type=datetime], [type=datetime-local], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=time], [type=url], [type=week], [type=file], select, input:not([type]), textarea {
+		padding: $small-spacing;
+		font-family: $font-main;
+		border: 3px solid $black;
+		border-radius: $base-border-radius;
+		background-color: transparent;
+		color: $black;
+	}
+	.select2-container .select2-selection--single {
+		height: 56px;
+		margin: 0;
+	}
+	.select2-selection.select2-selection--single {
+		border: 3px solid $black;
+		border-radius: $base-border-radius;
+		background-color: transparent;
+
+		.select2-selection__rendered {
+			padding: $small-spacing;
+			color: $black;
+		}
+		.select2-selection__arrow {
+			display: none;
+		}
+	}
+
+	.woocommerce-terms-and-conditions-wrapper {
+		margin-bottom: 1em;
+
+		.woocommerce-privacy-policy-link {
+			@include inline-block();
+			text-decoration: none;
+		}
+	}
+
+	table:not( .has-background ) th,
+	#payment .payment_methods > li .payment_box,
+	#payment .place-order {
+		background-color: $white--dark !important;
+	}
+
+	.woocommerce-checkout-review-order {
+		.button {
+			font-weight: 800;
+			border-radius: 3px;
+		}
+	}
+}
+
+.checkout_coupon.woocommerce-form-coupon {
+	[type=color], [type=date], [type=datetime], [type=datetime-local], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=time], [type=url], [type=week], [type=file], select, input:not([type]), textarea {
+		padding: $small-spacing;
+		font-family: $font-main;
+		border: 3px solid $black;
+		border-radius: $base-border-radius;
+		background-color: transparent;
+		color: $black;
+	}
+	.button {
+		@include btn-style();
+		line-height: $base-line-height;
+		background-color: transparent;
+	}
+}

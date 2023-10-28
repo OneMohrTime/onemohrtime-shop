@@ -578,6 +578,70 @@
 	}
 }
 
+@mixin btn-style {
+	@include btn-color();
+	padding: 1vw 2vw;
+	font-family: $font-header;
+	font-size: 1em;
+	font-weight: 800;
+	letter-spacing: 0.5px;
+	text-align: center;
+	text-transform: uppercase;
+	border-radius: $base-border-radius;
+
+	&::after {
+		content: "";
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		width: 0;
+		height: 10px;
+	}
+
+	@include media(">=screen960") {
+		padding: 0.25vw 1vw;
+		&::after {
+			transition: all $speed;
+		}
+	}
+
+	// hover, focus
+	@include hocus {
+		background-color: transparent;
+		color: inherit;
+
+		@include media(">=screen960") {
+			transition: all $speed;
+			&::after {
+				left: 0;
+				width: 100%;
+			}
+		}
+	}
+
+	&:active {
+		background-color: $black;
+		color: $white;
+	}
+
+	// disabled buttons
+	&:disabled {
+		opacity: 1;
+		border-color: $gray;
+		background-color: transparent;
+		color: $gray;
+		cursor: not-allowed !important;
+		// hover, focus
+		@include hocus {
+			background-color: $white--dark;
+			color: $gray;
+			&::after {
+				display: none;
+			}
+		}
+	}
+}
+
 @mixin btn-contact() {
 	@include btn-color($white);
 	@include caption();

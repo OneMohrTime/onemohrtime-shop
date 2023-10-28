@@ -2,159 +2,49 @@
 	Header
 ========================================================================== */
 
-.o-site__header {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 72px;
-	max-width: 100vw;
-	transition: $speed linear;
-	background: linear-gradient(to bottom right, $white 85%, $white--dark);
-	background-color: $black;
-	background-image: url("/wp-content/themes/onemohrtime/assets/img/concrete-dark.png");
-	background-position: center center;
-	box-shadow: 0 -1px 3px fade-out($black, 0.94), 0 -1px 2px fade-out($black, 0.88);
-	z-index: 20;
+.site-header {
 
-	@include media(">=screen600") {
-		top: 0;
-		bottom: auto;
-		height: 100px;
-		max-height: none;
-		background: transparent;
-		// background-color: transparent;
-		// background-image: linear-gradient(to bottom, $white percentage(2/3), fade-out($white, 1));
-		box-shadow: none;
+	@include media(">=screen768") {
+		padding-top: 2em;
+	}
 
-		// when the window scrolls up the page
-		&.-slideUp {
-			animation: navSlideUp $speed-slow ease forwards;
+	.site-search {
+
+		.search-field {
+			border-color: $white;
 		}
-		// when the window scrolls down the page
-		&.-slideDown {
-			animation: navSlideDown $speed-slow ease forwards;
+
+		.widget_product_search form::before {
+			top: 1.25em;
+			color: $white;
 		}
-	}
 
-	// center nav on wide displays
-	@include media(">=screen1600") {
-		left: calc(50% - 720px);
-		max-width: 1440px;
-	}
-
-	@include media(">=screen1920") {
-		left: calc(50% - 800px);
-		max-width: 1600px;
-	}
-
-	// When mobile nav is active
-	@include media("<screen600") {
-		&.is-active {
-			height: auto;
-			max-height: 100vh;
-
-			.c-navigation {
-				position: relative;
-			}
-
-			.menu {
-				opacity: 1;
-				visibility: visible;
-			}
+		@include media(">=screen768") {
+			margin-bottom: 0 !important;
 		}
 	}
 }
 
-//
-// allow clicking "behind" transparent area of nav
-//
-.o-site__header {
-
-	@include media(">=screen600") {
-		pointer-events: none;
+.site-header-cart {
+	@include media(">=screen768") {
+		flex: 0 1 230px;
+		width: auto !important;
 	}
 }
 
-.toggle__menu,
-.o-site__logo,
-.c-navigation {
+.site-branding {
 
-	@include media(">=screen600") {
-		pointer-events: auto;
-	}
-}
+	.custom-logo-link {
+		max-width: 44px;
+		max-height: 44px;
 
-.o-site__logo {
-	position: absolute;
-	top: 15px;
-	right: $gutter;
-	z-index: 35;
-
-	@include media(">=screen600") {
-		top: 30px;
-
-		.is-active & {
-			z-index: 50;
+		@include media(">=screen768") {
+			max-width: 52px;
+			max-height: 52px;
 		}
 	}
 
 	@include media(">=screen768") {
-		right: 0;
-		margin-right: $gutter-lg;
-	}
-
-	@include media(">=screen1024") {
-		margin-right: $gutter-xl;
-		transform: translateX(0);
-		transition: transform $speed;
-
-		.-slideUp &,
-		.-slideDown &,
-		.-activeNavigationAreaUpTopButNotWhenScrolling & {
-			transform: translateX( calc(100% + #{$gutter} + #{$gutter-sm}) );
-		}
-	}
-
-	@include media(">=screen1440") {
-		margin-right: $gutter * 4;
-	}
-
-
-	.c-media__svg {
-		display: block;
-		width: auto;
-		height: 40px;
-
-		#design {
-			// ID inside inline-svg
-			path {
-				fill: $black;
-				transition: $speed linear;
-				// always white at small sizes
-				@include media("<screen600") {
-					fill: $white;
-				}
-			}
-		}
-	}
-
-	&.inverted {
-		#design {
-			// ID inside inline-svg
-			path {
-				fill: $white;
-			}
-		}
-		// only turn logo yellow when menu is down
-		&:hover {
-			.c-media__svg {
-				#design {
-					path {
-						fill: $yellow;
-					}
-				}
-			}
-		}
+		margin-bottom: 0 !important;
 	}
 }

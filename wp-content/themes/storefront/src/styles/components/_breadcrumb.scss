@@ -1,0 +1,29 @@
+/* ==========================================================================
+	Breadcrumbs
+========================================================================== */
+
+.storefront-breadcrumb {
+	margin-bottom: 1rem !important;
+
+	.woocommerce-breadcrumb {
+		color: $black;
+
+		.breadcrumb-separator {
+			// padding: 0 1em;
+			&::after {
+				opacity: 1;
+			}
+		}
+
+		a {
+			@include inline-block();
+			text-decoration: none;
+
+			&:first-of-type::before {
+				content: "";
+				font-family: none;
+				// font-size: 0;
+			}
+		}
+	}
+}

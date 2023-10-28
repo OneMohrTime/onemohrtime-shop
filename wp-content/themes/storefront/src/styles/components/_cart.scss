@@ -1,0 +1,43 @@
+/* ==========================================================================
+	Cart
+========================================================================== */
+
+.widget_shopping_cart {
+	background-color: $black !important;
+
+	.widget_shopping_cart_content {
+		.button::after {
+			display: none;
+		}
+	}
+}
+
+.return-to-shop {
+
+	.button {
+		@include btn-style();
+		background-color: transparent;
+	}
+}
+
+.cart-collaterals {
+
+	h2 {
+		font-weight: 800;
+	}
+
+	th {
+		background-color: $white--dark !important;
+	}
+}
+
+.cart_totals {
+
+	.checkout-button.button.alt {
+		font-weight: 800;
+
+		&::after {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,13 @@
+/* ==========================================================================
+	Filters
+========================================================================== */
+
+.widget_layered_nav {
+	.woocommerce-widget-layered-nav-list {
+		.woocommerce-widget-layered-nav-list__item {
+			&::before {
+				opacity: 1;
+			}
+		}
+	}
+}

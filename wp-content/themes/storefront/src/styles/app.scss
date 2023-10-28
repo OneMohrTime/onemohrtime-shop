@@ -58,27 +58,36 @@
 --------------------------------------------------------------*/
 /* This section contains styles for various reusable components like articles, banners, buttons, cards, and more. */
 
+@import"components/account";
 @import"components/alert";
-@import"components/article";
-@import"components/banner";
-@import"components/blockquote";
+// @import"components/article";
+// @import"components/banner";
+// @import"components/blockquote";
+@import"components/breadcrumb";
 @import"components/buttons";
-@import"components/card";
-@import"components/case-studies";
-@import"components/contact";
-@import"components/css-design-award";
-@import"components/embed";
-@import"components/footer";
+// @import"components/card";
+@import"components/cart";
+// @import"components/case-studies";
+@import"components/checkout";
+// @import"components/contact";
+// @import"components/css-design-award";
+// @import"components/embed";
+@import"components/filters";
+@import"components/footer-bar";
+// @import"components/footer";
 @import"components/forms";
-@import"components/gallery";
-@import"components/logo";
+// @import"components/gallery";
+// @import"components/logo";
 @import"components/nav";
 @import"components/pagination";
-@import"components/parallax";
-@import"components/prism";
-@import"components/related-posts";
-@import"components/repeater";
-@import"components/text-image";
+// @import"components/parallax";
+// @import"components/prism";
+@import"components/product";
+@import"components/products";
+// @import"components/related-posts";
+// @import"components/repeater";
+// @import"components/text-image";
+@import"components/widget";
 
 /*--------------------------------------------------------------
 === 4.0 Pages ===
