@@ -1,0 +1,69 @@
+/* ==========================================================================
+	Alerts
+========================================================================== */
+
+.woocommerce-info,
+.woocommerce-noreviews,
+p.no-comments,
+.woocommerce-message,
+.woocommerce-error {
+	.button {
+		color: inherit;
+	}
+	a:not(.button) {
+		@include inline-block();
+		text-decoration: none !important;
+
+		&::before {
+			background-color: $white--darkest;
+		}
+	}
+}
+
+.woocommerce-info,
+.woocommerce-noreviews,
+p.no-comments {
+	background-color: $white--dark !important;
+	color: $black !important;
+	&::before {
+		color: $black !important;
+	}
+}
+
+.woocommerce-message {
+	margin: 0 0 $gutter-xs;
+	background-color: $yellow !important;
+	color: $black !important;
+
+	&::before {
+		color: $black !important;
+	}
+
+	.button {
+		border-color: $yellow--dark;
+		color: $black !important;
+		&::after {
+			display: none;
+		}
+	}
+}
+
+.woocommerce-error {
+	background-color: $red !important;
+}
+
+.site-header > .col-full,
+.site-content > .col-full,
+.site-footer > .col-full {
+
+	@include media(">=screen768") {
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+}
+
+.site-content > .col-full > .woocommerce > .woocommerce-message:first-child,
+.site-content > .col-full > .woocommerce > .woocommerce-info:first-child,
+.site-content > .col-full > .woocommerce > .woocommerce-error:first-child {
+	margin-top: 0;
+}

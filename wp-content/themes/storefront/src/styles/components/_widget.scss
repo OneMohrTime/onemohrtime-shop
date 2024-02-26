@@ -1,0 +1,18 @@
+/* ==========================================================================
+	Widget
+========================================================================== */
+
+.widget {
+	position: relative;
+
+	.widget-title {
+		@include label();
+		font-weight: 800 !important;
+		color: $black--lightest;
+	}
+
+	.button {
+		@include btn-style();
+		background-color: transparent;
+	}
+}

@@ -1,0 +1,101 @@
+/* ==========================================================================
+	Navigation
+========================================================================== */
+
+/**
+ * === MENU ===
+ */
+
+.storefront-primary-navigation {
+
+	@include media(">=screen768") {
+		.col-full {
+			display: flex;
+			align-items: flex-end;
+			max-width: 100%;
+		}
+	}
+}
+
+.main-navigation {
+
+	&.toggled {
+		.handheld-navigation .menu {
+			margin-top: 24px;
+		}
+	}
+
+	.primary-navigation {
+
+		& > .menu.nav-menu {
+			margin-left: 0;
+
+			& > .menu-item {
+				font-family: $font-header;
+				font-size: 1.5em;
+				font-weight: 800;
+				text-transform: uppercase;
+
+				@include media(">=screen768") {
+					a {
+						margin-right: 1em;
+						padding: 0;
+
+						&::after {
+							margin-left: 0.5em;
+							font-size: 0.75em;
+							color: $yellow;
+						}
+
+						@include hocus {
+							color: $white--darkest;
+						}
+					}
+				}
+			}
+		}
+
+		.sub-menu {
+			padding-top: 5px;
+			padding-bottom: 5px;
+			font-family: $font-main;
+			text-transform: none;
+
+			a {
+				padding: 5px 10px !important;
+				font-size: 1rem;
+				font-weight: 700;
+				&::after {
+					margin-top: 4px;
+				}
+			}
+		}
+
+		@include media(">=screen768") {
+			padding-bottom: 1em;
+		}
+	}
+
+	@include media(">=screen768") {
+		flex: 1 0 auto;
+	}
+}
+
+.secondary-navigation {
+	.menu {
+		.menu-item {
+			font-family: $font-header;
+			font-size: 1.15em;
+			text-transform: uppercase;
+
+			a {
+				font-weight: 800;
+				color: inherit;
+			}
+		}
+	}
+
+	@include media(">=screen768") {
+		margin-bottom: 0 !important;
+	}
+}

@@ -1,0 +1,30 @@
+/* ==========================================================================
+	Forms
+========================================================================== */
+
+#{$all-text-inputs} {
+	display: block;
+	width: auto;
+	height: auto;
+	padding: $small-spacing;
+	font-family: $font-main;
+	border: 3px solid $black;
+	border-radius: $base-border-radius;
+	background-color: transparent;
+	color: $black;
+	// all: revert;
+}
+
+#{$all-text-inputs-focus} {
+	background-color: transparent !important;
+}
+
+[type=file], select {
+	display: block;
+	padding: $small-spacing;
+	font-family: $font-main;
+	border: 3px solid $black;
+	border-radius: $base-border-radius;
+	background-color: transparent;
+	color: $black;
+}

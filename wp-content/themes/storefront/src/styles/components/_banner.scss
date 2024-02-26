@@ -1,0 +1,59 @@
+/* ==========================================================================
+	Banner
+========================================================================== */
+
+.c-banner {
+
+	/**
+	* === HOME ===
+	*/
+	&.-typographic {
+		@include block-width();
+		margin-bottom: $gutter-xl;
+		color: $black--light;
+	}
+
+	.is-home & {
+		display: flex;
+		align-items: center;
+		min-height: calc(100vh - $gutter-lg);
+	}
+}
+
+.c-banner__intro {
+	max-width: 100%;
+
+	.u-title {
+		@include subtitle();
+		position: relative;
+		max-width: 31ch;
+		margin-bottom: 0;
+		font-weight: 800;
+		line-height: 1em;
+
+		.is-home & {
+			@include media("<screen480") {
+				font-size: 3em;
+			}
+		}
+	}
+}
+
+.c-banner__link {
+	@include inline-block();
+	transform: rotate(-5deg) translate(-40px, 50px);
+	line-height: inherit;
+
+	&::before {
+		bottom: 0;
+		height: 12px !important;
+		background-color: $white !important;
+	}
+
+	@include hocus {
+		&::before {
+			bottom: 0 !important;
+			height: 100% !important;
+		}
+	}
+}
