@@ -81,7 +81,28 @@
 	}
 	.button {
 		@include btn-style();
-		line-height: $base-line-height;
+		padding: 1em 2vw !important;
 		background-color: transparent;
+	}
+}
+
+.woocommerce-checkout-payment {
+	.button.alt {
+		@include inline-block();
+		@include btn-style();
+		padding: 1em 2vw !important;
+		line-height: 1em;
+		background-color: transparent;
+
+		&::before {
+			bottom: 0;
+		}
+
+		@include hocus {
+			border-color: transparent;
+			&::before {
+				border-radius: $base-border-radius;
+			}
+		}
 	}
 }

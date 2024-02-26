@@ -7,12 +7,15 @@
 p.no-comments,
 .woocommerce-message,
 .woocommerce-error {
+	.button {
+		color: inherit;
+	}
 	a:not(.button) {
 		@include inline-block();
 		text-decoration: none !important;
 
 		&::before {
-			background-color: $gray--dark;
+			background-color: $white--darkest;
 		}
 	}
 }
@@ -20,7 +23,7 @@ p.no-comments,
 .woocommerce-info,
 .woocommerce-noreviews,
 p.no-comments {
-	background-color: $gray--lightest !important;
+	background-color: $white--dark !important;
 	color: $black !important;
 	&::before {
 		color: $black !important;
@@ -28,6 +31,7 @@ p.no-comments {
 }
 
 .woocommerce-message {
+	margin: 0 0 $gutter-xs;
 	background-color: $yellow !important;
 	color: $black !important;
 
@@ -37,7 +41,7 @@ p.no-comments {
 
 	.button {
 		border-color: $yellow--dark;
-		color: $black;
+		color: $black !important;
 		&::after {
 			display: none;
 		}
@@ -46,6 +50,16 @@ p.no-comments {
 
 .woocommerce-error {
 	background-color: $red !important;
+}
+
+.site-header > .col-full,
+.site-content > .col-full,
+.site-footer > .col-full {
+
+	@include media(">=screen768") {
+		max-width: 100%;
+		box-sizing: border-box;
+	}
 }
 
 .site-content > .col-full > .woocommerce > .woocommerce-message:first-child,

@@ -111,8 +111,15 @@
 	.woocommerce-tabs.wc-tabs-wrapper {
 		color: $black;
 
+		a {
+			@include inline-block();
+		}
+
 		ul.tabs li a {
 			color: inherit;
+			&::before {
+				display: none;
+			}
 		}
 
 		ul.tabs li.active a {
@@ -122,6 +129,14 @@
 		.panel h2,
 		.panel h3 {
 			font-weight: 800;
+		}
+	}
+
+	.storefront-sticky-add-to-cart {
+		padding-left: 0;
+		padding-right: 0;
+		.col-full {
+			max-width: 100%;
 		}
 	}
 
@@ -162,6 +177,14 @@
 		.submit {
 			@include btn-style();
 			background-color: transparent;
+		}
+		#respond {
+			padding: $gutter 0 $gutter-xs;
+			background-color: transparent
+		}
+		label {
+			@include label();
+			margin-bottom: 0.5em;
 		}
 	}
 

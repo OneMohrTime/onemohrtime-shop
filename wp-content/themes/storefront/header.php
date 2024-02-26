@@ -12,10 +12,18 @@
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-9273144339390897" />
+
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;800&family=Barlow:ital,wght@0,300;0,400;0,600;1,400;1,600&display=swap" />
+
+<!-- Start WP Head Function -->
 <?php wp_head(); ?>
+<!-- End WP Head Function -->
 </head>
 
 <body <?php body_class(); ?>>
