@@ -1,0 +1,62 @@
+/* ==========================================================================
+    Sidebar
+========================================================================== */
+
+/**
+ * === COMPONENT ===
+ */
+
+.c-sidebar {
+
+    // screen at or above 600px
+    @include media(">=small") {}
+
+    // screen at or above 900px
+    @include media(">=medium") {}
+
+    // screen at or above 1200px
+    @include media(">=large") {}
+}
+
+/**
+ * === PARTIAL ===
+ */
+
+.o-sidebar {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    background-color: $white--dark;
+    padding: $gutter;
+}
+
+/**
+ * === SITE LAYOUT ===
+ */
+
+.o-site__main.has-sidebar {
+    padding-bottom: 0;
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        display: flex;
+
+        .o-page {
+            flex: 1 1 percentage(7 / 12);
+        }
+
+        .o-sidebar {
+            flex: 1 1 percentage(5 / 12);
+        }
+    }
+
+    // screen at or above 1200px
+    @include media(">=large") {
+        .o-page {
+            flex-basis: 75%;
+        }
+        .o-sidebar {
+            flex-basis: 25%;
+        }
+    }
+}
