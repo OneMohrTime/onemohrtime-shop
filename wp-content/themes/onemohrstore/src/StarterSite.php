@@ -11,16 +11,19 @@ class StarterSite extends Site {
         add_action('after_setup_theme', array($this, 'theme_supports'));
         add_action('after_setup_theme', array($this, 'navigation_menus'));
         add_action('after_setup_theme', array($this, 'theme_add_woocommerce_support'));
-        // add_action('after_setup_theme', array($this, 'timber_set_product'));
+        add_action('after_setup_theme', array($this, 'timber_set_product'));
         // add_action('init', array($this, 'register_post_types'));
         // add_action('init', array($this, 'register_taxonomies'));
         add_action('wp_enqueue_scripts', array($this, 'load_scripts'));
         add_action('widgets_init', array($this, 'create_sidebars'));
+        add_action('pre_get_posts', array($this, 'custom_category_query_vars'));
 
         add_filter('timber/context', array($this, 'add_to_context' ));
         add_filter('timber/twig', array($this, 'add_to_twig' ));
         add_filter('timber/twig/environment/options', [$this, 'update_twig_environment_options']);
         add_filter('wpseo_metabox_prio', array($this, 'move_yoast_seo_metabox'));
+        // add_filter('term_link', array($this, 'custom_category_pagination_links', 10, 3));
+        add_filter('rewrite_rules_array', array($this, 'custom_category_pagination_rewrite_rules'));
 
         parent::__construct();
     }
@@ -29,17 +32,17 @@ class StarterSite extends Site {
      * The first step to get your WooCommerce project integrated with Timber is
      * declaring WooCommerce support in your theme’s functions.php file like so.
      */
-    // public function theme_add_woocommerce_support() {
-    //     add_theme_support('woocommerce');
-    // }
+    public function theme_add_woocommerce_support() {
+        add_theme_support('woocommerce');
+    }
 
-    // public function timber_set_product($post) {
-    //     global $product;
+    public function timber_set_product($post) {
+        global $product;
 
-    //     if (is_woocommerce()) {
-    //         $product = wc_get_product($post->ID);
-    //     }
-    // }
+        if (is_woocommerce()) {
+            $product = wc_get_product($post->ID);
+        }
+    }
 
     // /**
     //  * This is where you can register custom post types.
@@ -54,11 +57,44 @@ class StarterSite extends Site {
     // }
 
     /**
+     * Adjust rewrite rules for paginated category archives
+     */
+    public function custom_category_pagination_rewrite_rules($rules) {
+        $new_rules = [];
+        $new_rules['([^/]+)/page/([0-9]{1,})/?$'] = 'index.php?category_name=$matches[1]&paged=$matches[2]';
+        return $new_rules + $rules;
+    }
+
+    // /**
+    //  * Adjust category archive link structure to include pagination
+    //  */
+    // public function custom_category_pagination_links($link, $term, $taxonomy) {
+    //     if ('category' === $taxonomy) {
+    //         $link = trailingslashit($link);
+    //     }
+    //     return $link;
+    // }
+
+    /**
+     * Ensure query vars handle pagination with category base
+     */
+    public function custom_category_query_vars($query) {
+        if (isset($query->query_vars['category_name']) && isset($query->query_vars['paged'])) {
+            $query->set('category_name', $query->query_vars['category_name']);
+            $query->set('paged', $query->query_vars['paged']);
+        }
+        return $query;
+    }
+
+    /**
      * This is where you load the frontend CSS & JS files
      */
     public function load_scripts() {
         // Main "screen" stylesheet
         wp_enqueue_style( 'main', get_template_directory_uri() . '/assets/css/app.css', array(), null, 'screen' );
+
+        // Google Webfonts
+        wp_enqueue_style( 'fonts', 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap', array(), null, 'screen' );
 
         // Main script file
         wp_enqueue_script( 'main', get_template_directory_uri() . '/assets/js/app.js', array(), null, true );
@@ -78,6 +114,11 @@ class StarterSite extends Site {
     public function navigation_menus() {
         register_nav_menus([
             'primary' => 'Primary Navigation',
+            'mega1' => 'MegaMenu Column 1',
+            'mega2' => 'MegaMenu Column 2',
+            'mega3' => 'MegaMenu Column 3',
+            'mega4' => 'MegaMenu Column 4',
+            'mega5' => 'MegaMenu Column 5',
             'utility' => 'Utility Navigation',
             'footer' => 'Footer Navigation',
         ]);
@@ -89,7 +130,7 @@ class StarterSite extends Site {
     public function create_sidebars() {
         register_sidebar( array(
             'name' => 'Global Sidebar',
-            'id' => 'global-sidebar',
+            'id' => 'globalSidebar',
             'before_widget' => '<div class="c-widget">',
             'after_widget' => '</div>',
             'before_title' => '<h3 class="u-heading">',
@@ -119,6 +160,11 @@ class StarterSite extends Site {
         $context['siteLogo'] = $custom_logo_url;
 
         $context['primaryMenu'] = Timber::get_menu('primary');
+        $context['menuColumn1'] = Timber::get_menu('mega1');
+        $context['menuColumn2'] = Timber::get_menu('mega2');
+        $context['menuColumn3'] = Timber::get_menu('mega3');
+        $context['menuColumn4'] = Timber::get_menu('mega4');
+        $context['menuColumn5'] = Timber::get_menu('mega5');
         $context['utilityMenu'] = Timber::get_menu('utility');
         $context['footerMenu']  = Timber::get_menu('footer');
 
@@ -151,8 +197,8 @@ class StarterSite extends Site {
         add_theme_support(
             'html5',
             array(
-                'comment-form',
-                'comment-list',
+                // 'comment-form',
+                // 'comment-list',
                 'gallery',
                 'caption',
             )
@@ -179,6 +225,8 @@ class StarterSite extends Site {
         add_theme_support( 'menus' );
 
         add_theme_support( 'custom-logo' );
+
+        add_post_type_support( 'page', 'excerpt' );
     }
 
     /**
