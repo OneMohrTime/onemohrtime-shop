@@ -45,14 +45,12 @@
             }
         } only %}
 
+        <figure class="o-section is-social-feed" data-module-scroll>
+            {% apply shortcodes %}
+                [instagram-feed feed=3]
+            {% endapply %}
+        </figure>
 
     </article>
-
-    {# Sidebar #}
-    {% include '_partials/sidebar.twig' with {
-        params: {
-            widgets: sidebar
-        }
-    } only %}
 
 {% endblock %}

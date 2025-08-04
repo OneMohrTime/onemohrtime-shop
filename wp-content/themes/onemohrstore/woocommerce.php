@@ -10,7 +10,7 @@ if (!class_exists('Timber')) {
 }
 
 $context = Timber::context();
-$context['sidebar'] = Timber::get_widgets('shop-sidebar');
+// $context['sidebar'] = Timber::get_widgets('shop-sidebar');
 
 if (is_singular('product')) {
     $context['post'] = Timber::get_post();
@@ -28,7 +28,9 @@ if (is_singular('product')) {
     Timber::render('templates/_woocommerce/single-product.twig', $context);
 } else {
     $posts = Timber::get_posts();
+    $shop_id = wc_get_page_id('shop');
     $context['products'] = $posts;
+    $context['shop_page'] = Timber::get_post($shop_id);
 
     if (is_product_category()) {
         $queried_object = get_queried_object();

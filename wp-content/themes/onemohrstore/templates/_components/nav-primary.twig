@@ -2,6 +2,8 @@
 
 {% set this = {
     menu: navMenu,
+    social: megaMenu.social,
+    cart: params.cart,
     siteName: params.siteName,
     siteUrl: params.siteUrl,
     logo: params.logo
@@ -11,29 +13,13 @@
 
 <nav class="c-navigation">
 
-    <a href="{{ this.siteUrl }}" id="logo" class="c-navigation__logo">
-        {% if this.logo is defined and this.logo is not empty %}
-        <img src="{{ this.logo }}" alt="{{ this.siteName }} logo" class="c-media__image" />
-        {% else %}
-        <strong>{{ this.siteName }}</strong>
-        {% endif %}
-    </a>
-
-    <div class="c-navigation__toggle">
-        <button class="c-hamburger" data-toggle-menu>
-            <span class="c-hamburger__line"></span>
-            <span class="c-hamburger__line"></span>
-            <span class="c-hamburger__line"></span>
-        </button>
-    </div>
-
     {% if this.menu %}
-        <ul class="c-navigation__menu c-menu is-hidden">
+        <ul class="c-navigation__menu is-hidden">
 
             {% for item in this.menu.get_items %}
                 {% set activeMenuClass = ('current-menu-item' in item.classes == 1) ? ' is-current' %}
 
-                <li class="c-navigation__menuItem c-menuItem{{ activeMenuClass }}">
+                <li class="c-navigation__menuItem {{ activeMenuClass }}">
 
                     {% if 'c-button' in item.classes %}
                         <a href="{{ item.link }}" class="c-button is-primary"{% if item.target != '_self' %} target="{{ item.target }}"{% endif %}>
@@ -41,15 +27,15 @@
                         </a>
 
                     {% elseif item.children %}
-                        <a href="{{ item.link }}" class="u-link">
+                        <a href="{{ item.link }}" class="u-nav-link">
                             {{ item.title }}
                         </a>
 
                     {% else %}
-                        <a href="{{ item.link }}" class="u-link{% if item.target == '_blank' %} is-external{% endif %}"{% if item.target != '_self' %} target="{{ item.target }}"{% endif %}>
+                        <a href="{{ item.link }}" class="u-nav-link{% if item.target == '_blank' %} is-external{% endif %}"{% if item.target != '_self' %} target="{{ item.target }}"{% endif %}>
                             {{ item.title }}
                             {% if item.target == '_blank' %}
-                                {{ source('assets/img/icons/external-link.svg') }}
+                                {{ source('_elements/svg/external-link.svg') }}
                             {% endif %}
                         </a>
 
@@ -61,7 +47,7 @@
                             {% for submenu in item.children %}
                                 {% set activeMenuClass = ('current-menu-item' in submenu.classes == 1) ? ' is-current' %}
                                 <li class="c-submenu__item{{ activeMenuClass }}">
-                                    <a href="{{ submenu.link }}" class="u-link">
+                                    <a href="{{ submenu.link }}" class="u-nav-link">
                                         {{ submenu.title }}
                                     </a>
                                 </li>
@@ -72,6 +58,49 @@
                 </li>
             {% endfor %}
         </ul>
+
+        {% include '_components/nav-mega-menu.twig' with {
+            params: {
+                mega1: this.mega1,
+                mega2: this.mega2,
+                mega3: this.mega3,
+                mega4: this.mega4,
+                mega5: this.mega5,
+                social: this.social,
+                search: this.siteUrl
+            }
+        } only %}
+
     {% endif %}
+
+    <a href="{{ this.siteUrl }}" id="logo" class="c-navigation__logo">
+        {% if this.logo is defined and this.logo is not empty %}
+            <img src="{{ this.logo }}" alt="{{ this.siteName }} logo" class="c-media__image" />
+        {% else %}
+            <strong>{{ this.siteName }}</strong>
+        {% endif %}
+    </a>
+
+    <div class="c-navigation__search">
+        {{ fn('get_product_search_form') }}
+    </div>
+
+    <div class="c-navigation__cart">
+        <a href="{{ fn('wc_get_cart_url') }}" class="c-tooltip__anchor" aria-describedby="view_cart">
+            {{ source('_elements/svg/cart.svg') }}
+            {% if this.cart.get_cart_contents_count() > 0 %}
+                <span class="cart-count">{{ this.cart.get_cart_contents_count() }}</span>
+            {% endif %}
+        </a>
+        <div id="view_cart" class="c-tooltip" role="tooltip">View Cart</div>
+    </div>
+
+    <div class="c-navigation__toggle">
+        <button class="c-hamburger" data-toggle-menu>
+            <span class="c-hamburger__line"></span>
+            <span class="c-hamburger__line"></span>
+            <span class="c-hamburger__line"></span>
+        </button>
+    </div>
 
 </nav>

@@ -5,33 +5,65 @@
 {# -- Page Variables -- #}
 {# ----------------------------------------------------------------- #}
 {% set postTypeClass = 'shop' %}
+{% set headline = shop_page.meta('post_headline')|default(shop_page.title) %}
+{% set subheadline = shop_page.meta('post_subheadline')|default(null) %}
+{% set bannerImage = shop_page.meta('banner_image') ?? shop_page.thumbnail|default(null) %}
+{% set bannerImages = shop_page.meta('banner_images')|default(null) %}
+{% set bannerVideo = shop_page.meta('banner_video_embed')|default(null) %}
+{% set bannerType = shop_page.meta('banner_type')|default('default') %}
+{% set button = shop_page.meta('banner_button')|default(null) %}
+{% set pageBuilder = shop_page.meta('section_builder')|default(null) %}
 
 {# -- Page Template -- #}
 {# ----------------------------------------------------------------- #}
 
 {% block content %}
 
+    <!-- Start `woocommerce_before_main_content` -->
     {% do action('woocommerce_before_main_content') %}
+    <!-- End `woocommerce_before_main_content` -->
 
-    <div class="woocommerce-sorting">
-        <h1 class="u-title">Shop</h1>
+    <article class="o-page">
+
+        {% include '_components/banner.twig' with {
+            params: {
+                headline: headline,
+                text: subheadline,
+                style: bannerType,
+                image: bannerImage,
+                images: bannerImages,
+                video: bannerVideo,
+                button: button
+            }
+        } only %}
+
+        <!-- Start `woocommerce_before_shop_loop` -->
         {% do action('woocommerce_before_shop_loop') %}
-    </div>
+        <!-- End `woocommerce_before_shop_loop` -->
 
-    <div class="c-grid is-products">
-        {% for post in products %}
-            {% include '_components/tease-product.twig' with {
-                product: {
-                    ID: post.id,
-                    title: post.title,
-                    content: post.content,
-                    excerpt: post.excerpt
-                }
-            } only %}
-        {% endfor %}
-    </div>
+        <div class="c-grid is-products">
+            {% for post in products %}
+                {% include '_components/tease-product.twig' with {
+                    product: {
+                        ID: post.id,
+                        title: post.title,
+                        content: post.content,
+                        excerpt: post.excerpt
+                    }
+                } only %}
+            {% endfor %}
+        </div>
 
-    {% do action('woocommerce_after_shop_loop') %}
+        <!-- Start `woocommerce_after_shop_loop` -->
+        {% do action('woocommerce_after_shop_loop') %}
+        <!-- End `woocommerce_after_shop_loop` -->
+    </article>
+
+    {# Filters #}
+    {% include '_partials/sidebar.twig' %}
+
+    <!-- Start `woocommerce_after_main_content` -->
     {% do action('woocommerce_after_main_content') %}
+    <!-- End `woocommerce_after_main_content` -->
 
 {% endblock  %}

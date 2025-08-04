@@ -27,29 +27,20 @@
         } only %}
 
         {% if post.content is not empty %}
-            <section class="c-intro" data-scroll-trigger>
-                <div class="u-wysiwyg">
+            <section class="c-intro" data-module-scroll>
+                <div class="u-wysiwyg" data-scroll-trigger>
                     {{ post.content }}
                 </div>
             </section>
         {% endif %}
 
-        <section class="c-blog" data-scroll-trigger>
-            {% for post in posts %}
-                <div class="c-blog__post">
-                    {% include '_components/tease.twig' with {
-                        params: {
-                            headline: post.meta('post_headline')|default(post.title),
-                            image: post.thumbnail,
-                            missing: websiteTheme ~ '/assets/img/placeholder.jpg',
-                            content: post.content,
-                            date: post.date,
-                            link: post.link,
-                            format: post.type
-                        }
-                    } only %}
-                </div>
-            {% endfor %}
+        <section class="o-section is-list" data-module-scroll>
+            {% include '_components/list.twig' with {
+                style: 'posts',
+                params: {
+                    items: posts,
+                }
+            } %}
         </section>
 
         {% include '_components/pagination.twig' with {
@@ -58,9 +49,17 @@
             }
         } %}
 
+        {% if relatedPosts is not empty %}
+            <footer class="o-page__related has-{{ relatedPosts|length }}-columns" data-module-scroll>
+                <h3 class="u-subheadline" data-scroll-trigger>Related Reading</h3>
+                {% include '_components/related-posts.twig' with {
+                    related: relatedPosts
+                } only %}
+            </footer>
+        {% endif %}
+
     </article>
 
-    {% include '_partials/sidebar.twig' %}
     {# {% include '_partials/sidebar.twig' with {
         params: {
             widgets: sidebar

@@ -4,6 +4,8 @@
 {% set this = {
     primary: params.menu|default(null),
     utility: params.utility|default(null),
+    cart: params.cart|default(null),
+    socialMedia: megaMenu.social|default(null),
     siteName: params.siteName|default(null),
     siteLogo: params.siteLogo|default(null),
     siteUrl: params.siteUrl|default(null),
@@ -24,7 +26,8 @@
         params: {
             siteName: this.siteName,
             siteUrl: this.siteUrl,
-            logo: this.siteLogo
+            logo: this.siteLogo,
+            cart: this.cart
         }
     } only %}
 {% endif %}

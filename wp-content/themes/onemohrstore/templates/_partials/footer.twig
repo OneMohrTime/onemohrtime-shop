@@ -2,13 +2,10 @@
 {# ----------------------------------------------------------------- #}
 
 {% set this = {
-    hideCTA: params.cta,
-    headline: params.headline|default('Looking for items on sale?'),
-    text: params.text|default('<p>Offering a range of GE MRI services including high-order calibrations, ramping, shimming, white pixel adjustments, BRM changes, troubleshooting, system part sales, relocations, installations, de-installations, and site planning.</p>'),
-    button: params.button ?? null,
-    siteLogo: params.siteLogo,
+    logo: params.logo,
     about: params.about,
-    contact: params.contact,
+    flags: params.flags,
+    press: params.press,
     social: params.social,
     navigation: params.menu,
     siteName: params.siteName,
@@ -19,50 +16,42 @@
 {# ----------------------------------------------------------------- #}
 
 <footer class="o-site__footer">
-
-    {# -- Call to Action -- #}
-    {% if this.hideCTA != true %}
-        {% include '_components/cta.twig' with {
-            params: {
-                headline: this.headline,
-                text: this.text
-            }
-        } only %}
-    {% endif %}
-
-    {# -- Footer -- #}
     <div id="colophon" class="c-footer">
         <h2 class="u-screen-reader-text">Footer Info</h2>
-        <div class="c-footer__logo">
-            {% if this.siteLogo %}
-                <a href="{{ this.siteUrl }}" class="c-media">
-                    <img src="{{ this.siteLogo }}" alt="{{ this.siteName }}" class="c-media__image" />
-                </a>
-            {% endif %}
-        </div>
-        <div class="c-footer__nav">
+
+        <nav class="c-footer__portfolio">
+            <h3 class="u-subheadline">Explore More:</h3>
             <ul class="c-menu">
-                {% for item in this.navigation %}
-                    <li class="c-menuItem">
-                        {{ item }}
-                    </li>
-                {% endfor %}
+                <li class="c-menuItem">
+                    <a href="" class="c-button is-inverse">Logo Design</a>
+                </li>
             </ul>
-        </div>
-        <div class="c-footer__utility">
-            <ul class="c-footer__social">
+            <ul class="c-menu">
                 {% for profile in this.social %}
-                    {% set profile = profile.account %}
+                    {% set profile = profile.profile %}
                     <li class="c-footer__social-profile">
                         <a href="{{ profile.url }}" target="_blank" rel="noopener noreferrer nofollow">
-                            {{ source('_components/svg/social-' ~ profile.title ~ '.twig') }}
+                            {{ source('_elements/svg/social-' ~ profile.title|lower ~ '.svg') }}
                         </a>
                     </li>
                 {% endfor %}
             </ul>
-            <div class="c-footer__legal">
-                <p>&copy; {{ this.siteName }} {{ 'now'|date('Y') }} | Website by <a href="https://onemohrti.me?utm_campaign=Footer+Links&utm_source={{ this.siteName|replace({' ':'+'}) }}" class="u-link" target="_blank" rel="noopener noreferrer nofollow">Derek Mohr</a></p>
-            </div>
+        </nav>
+
+        <div class="c-footer__utility">
+            <p>&copy; 2011 &ndash; {{ 'now'|date('Y') }} | Derek Mohr | <a href="https://onemohrti.me/" class="u-highlight">OneMohrTime Design Co.</a></p>
+            <ul class="c-footer__legal c-menu">
+                <li class="c-menuItem">
+                    <a href="https://onemohrti.me/privacy-policy" class="u-highlight">Privacy</a>
+                </li>
+                <li class="c-menuItem">
+                    <a href="https://onemohrti.me/terms-of-use" class="u-highlight">Terms</a>
+                </li>
+                <li class="c-menuItem">
+                    <a href="https://onemohrti.me/cookie-policy" class="u-highlight">Cookies</a>
+                </li>
+            </ul>
         </div>
+
     </div>
 </footer>

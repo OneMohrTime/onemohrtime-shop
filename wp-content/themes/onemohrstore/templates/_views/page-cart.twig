@@ -11,7 +11,6 @@
 {% set bannerVideo = post.meta('banner_video_embed')|default(null) %}
 {% set bannerType = post.meta('banner_type')|default('default') %}
 {% set button = post.meta('banner_button')|default(null) %}
-{% set contactForm = post.meta('contact_form')|default(null) %}
 {% set pageBuilder = post.meta('section_builder')|default(null) %}
 
 {# -- Page Template -- #}
@@ -33,26 +32,10 @@
         } only %}
 
         {% if post.content is not empty %}
-            <section class="c-intro">
-                <div class="u-wysiwyg">
-                    {{ post.content }}
-                </div>
+            <section class="c-intro" data-scroll-trigger>
+                {{ post.content }}
             </section>
         {% endif %}
-
-        {% if contactForm is not empty %}
-            <section class="c-contact">
-                {% apply shortcodes %}
-                    [wpforms id="{{ contactForm.ID }}" title="false" description="false"]
-                {% endapply %}
-            </section>
-        {% endif %}
-
-        {% include '_partials/page-builder.twig' with {
-            params: {
-                sections: pageBuilder
-            }
-        } only %}
 
     </article>
 
