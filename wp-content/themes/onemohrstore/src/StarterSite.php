@@ -159,6 +159,8 @@ class StarterSite extends Site {
         $custom_logo_url = wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' );
         $context['siteLogo'] = $custom_logo_url;
 
+        $context['woocart'] = WC()->cart;
+
         $context['primaryMenu'] = Timber::get_menu('primary');
         $context['menuColumn1'] = Timber::get_menu('mega1');
         $context['menuColumn2'] = Timber::get_menu('mega2');
