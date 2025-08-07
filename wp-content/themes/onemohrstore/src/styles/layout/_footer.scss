@@ -4,13 +4,22 @@
 
 .o-site__footer {
     position: relative;
+    background-color: $black;
+    color: $white;
 
-    // screen at or above 600px
-    @include media(">=small") {}
+    .u-eyebrow {
+        margin-bottom: $base-spacing;
+        color: $white--darker;
+    }
 
-    // screen at or above 900px
-    @include media(">=medium") {}
+    .u-wysiwyg a::before,
+    .u-link::before {
+        background-color: $gray--darkest !important;
+    }
 
-    // screen at or above 1200px
-    @include media(">=large") {}
+    // screen at or above 1500px
+    @include media(">=big") {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+    }
 }

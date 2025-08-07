@@ -1,5 +1,35 @@
 /* ==========================================================================
-    About
+    About & About Me
 ========================================================================== */
 
-.t-page.is-about {}
+.t-page.is-about {
+
+    // Sections
+    .o-page__sections {
+        padding-bottom: $gutter;
+    }
+
+    // Instagram Section
+    .o-section.is-social-feed {
+        @include padding();
+
+        #sb_instagram {
+            padding-bottom: 0 !important;
+            #sbi_images {
+                padding-top: $gutter;
+                padding-bottom: $gutter;
+            }
+        }
+    }
+
+}
+
+.t-page.is-me {
+
+    // Work & Education History
+    .o-page__sections {
+        @include padding();
+        padding-bottom: $gutter;
+    }
+
+}

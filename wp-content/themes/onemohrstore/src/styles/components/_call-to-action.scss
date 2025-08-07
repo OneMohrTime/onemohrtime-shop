@@ -2,29 +2,51 @@
     Call to Action (CTA)
 ========================================================================== */
 
-.c-callToAction {
+.c-call-to-action {
+    @include padding('2x');
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: $gutter;
-    background-color: $gray--light;
-}
-
-.c-callToAction__text {
-    @include content-width();
-    text-align: center;
+    row-gap: $base-spacing;
+    padding-top: $gutter;
+    padding-bottom: $gutter;
+    background-color: $yellow;
+    color: $black;
 
     // screen at or above 900px
     @include media(">=medium") {
-    }
-
-    .u-headline {
-        margin-bottom: 0.5em;
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 
-.c-callToAction__button {
+.c-call-to-action__primary {
+    @include content-width();
+    text-align: center;
+
+    .u-headline {
+        margin-bottom: $small-spacing;
+    }
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        margin-right: $gutter;
+        text-align: left;
+
+        .u-headline {
+            margin-bottom: 0.25em;
+        }
+    }
+}
+
+.c-call-to-action__secondary {
+    .c-button {
+        @include btn-color($black, $black);
+    }
+}
+
+.c-call-to-action__button {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;

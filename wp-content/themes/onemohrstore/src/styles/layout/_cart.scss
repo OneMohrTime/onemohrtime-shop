@@ -52,4 +52,9 @@
 
     }
 
+    // Elements
+    .wc-block-components-button.wc-block-cart__submit-button {
+        @include btn-style();
+    }
+
 }

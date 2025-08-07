@@ -3,8 +3,8 @@
 ========================================================================== */
 
 ::selection {
-    color: $white;
-    background-color: $blue;
+    color: $yellow;
+    background-color: shade($gold, 15%);
     text-shadow: none;
 }
 
@@ -59,23 +59,29 @@ h6 {
 
 .u-wysiwyg {
     @include content-width();
+    line-height: $line-height;
 
     h1, h2, h3, h4, h5, h6 {
         display: block;
         margin-bottom: $small-spacing;
+        line-height: $heading-height;
 
         // headers in a wysiwyg section only...hopefully
         &:not([class]) {
-            margin-bottom: ($line-height / 2);
+            margin-bottom: math.div($line-height, 2);
         }
         // remove top margin for first heading in sections
         &:not([class]):not(:first-child) {
-            margin-top: ($line-height / 2);
+            margin-top: math.div($line-height, 2);
         }
     }
 
     p, ul, ol {
         line-height: inherit;
+    }
+
+    p + p {
+        margin-top: math.div($line-height, 2);
     }
 }
 
@@ -123,7 +129,7 @@ ul, ol, dl {
 
         // custom styled dots
         li::marker {
-            color: $blue;
+            color: $gold;
         }
 
         // child elements
@@ -164,19 +170,23 @@ ul, ol, dl {
 }
 
 .u-headline {
-    @include subtitle();
+    @include headline();
 
     &.is-underlined {
-        @include subtitle("underlined");
+        @include headline("underlined");
     }
 }
 
 .u-subheadline {
-    @include paragraph();
+    @include subheadline();
 
     &.is-underlined {
-        @include paragraph("underlined");
+        @include subheadline("underlined");
     }
+}
+
+.u-tagline {
+    @include tagline();
 }
 
 .u-eyebrow {
@@ -186,6 +196,19 @@ ul, ol, dl {
     text-transform: uppercase;
     letter-spacing: rem(1px);
     line-height: $heading-height;
+}
+
+.u-link {
+    @include inline-link();
+}
+
+.u-highlight {
+    @include highlight-link();
+}
+
+.u-quotes {
+    color: $white--darker;
+    line-height: 1em;
 }
 
 /**
@@ -227,12 +250,12 @@ abbr {
 }
 
 mark {
-    background-color: $blue;
-    color: $white;
+    background-color: $gold;
+    color: $black;
 }
 
 blockquote {
-    border-left: 10px $blue solid;
+    border-left: 10px $yellow solid;
     margin: $base-spacing 0;
     padding-left: 10px;
 
@@ -262,8 +285,8 @@ blockquote {
 
 hr {
     width: 50%;
-    height: 2px;
-    margin: $base-spacing auto;
+    height: 3px;
+    margin: $small-spacing auto;
     border: 0;
-    background-color: $blue;
+    background-color: $yellow;
 }

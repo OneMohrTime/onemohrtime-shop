@@ -1,0 +1,41 @@
+/* ==========================================================================
+    Logo Design / Logofolio
+========================================================================== */
+
+.t-page.is-logo-design {
+
+    // Logo Section
+    .o-section.is-logofolio {
+        @include padding('2x');
+        padding-top: $gutter;
+        padding-bottom: $gutter;
+        background-color: $white;
+        background-image: url("https://onemohrti.me/wp-content/uploads/graphy.png");
+        background-position: center center;
+        background-blend-mode: multiply;
+
+        .c-logo {
+            pointer-events: none;
+
+            .c-media__image {
+                object-fit: contain;
+            }
+        }
+
+        // screen at or above 900px
+        @include media(">=medium") {
+            .c-media {
+                &::before {
+                    max-height: rem(140px);
+                }
+            }
+
+            .c-media__image {
+                top: 50%;
+                max-height: rem(140px);
+                transform: translateY(-50%);
+            }
+        }
+    }
+
+}

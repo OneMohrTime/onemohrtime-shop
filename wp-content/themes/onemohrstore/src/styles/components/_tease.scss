@@ -57,33 +57,58 @@
 
     .price {
         display: block;
+        font-size: $font-base-sm;
+        font-weight: $font-bold;
         line-height: $heading-height;
+        color: $black--lightest;
     }
 
     .woocommerce-loop-product__link {
         position: relative;
         display: block;
+    }
 
-        // Add to Cart
-        & + a {
-            @include btn-style();
-            display: inline-block;
-            // @include inline-link();
-            margin-top: $gutter-xs;
-            // line-height: $heading-height;
+    .button.product_type_variable,
+    .button.product_type_simple.add_to_cart_button {
+        @include btn-style();
+        display: inline-block;
+        margin-top: $gutter-xs;
+        padding: math.div($small-spacing, 2) math.div($base-spacing, 2);
+        font-size: $font-base;
+
+        &::after {
+            height: 6px;
         }
     }
 
+    .added_to_cart {
+        @include highlight-link();
+        margin-left: $base-spacing;
+        font-size: $font-base-sm;
+        font-weight: $font-bold;
+        line-height: $heading-height;
+    }
+
     .woocommerce-loop-product__title {
-        @include paragraph();
-        margin-top: 0.5em;
+        margin-top: $gutter-xs;
         margin-bottom: 0.5em;
+        font-size: $font-h6;
     }
 
     // screen at or above 900px
     @include media(">=medium") {
         flex-basis: percentage(1/3);
         max-width: calc(percentage(1/3) - ($gutter / 3 * 2));
+
+        .woocommerce-loop-product__title {
+            margin-top: $gutter-xs;
+        }
+    }
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        flex-basis: 25%;
+        max-width: calc(25% - ($gutter / 4 * 3));
 
         .woocommerce-loop-product__title {
             margin-top: $gutter-xs;

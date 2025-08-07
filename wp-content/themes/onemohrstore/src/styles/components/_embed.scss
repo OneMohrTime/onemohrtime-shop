@@ -3,15 +3,27 @@
 ========================================================================== */
 
 .c-embed {
-    // @include padding();
+    position: relative;
+}
 
-    &.is-wide {
-        padding-left: $gutter;
-        padding-right: $gutter;
+.c-embed__script {
+    display: block;
+}
+
+.c-embed__audio {
+
+    audio {
+        width: 100%;
+        max-width: 80ch;
+        border: 3px solid $black;
+        border-radius: $border-radius;
+        background-color: transparent;
     }
 
-    &.is-fullWidth {
-        padding-left: 0;
-        padding-right: 0;
+    // screen at or above 600px
+    @include media(">=small") {
+        display: flex;
+        align-items: center;
+        column-gap: $gutter-sm;
     }
 }
