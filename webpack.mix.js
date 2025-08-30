@@ -4,8 +4,8 @@ require('laravel-mix-imagemin');
 
 let PATHS = {
     node: './node_modules',
-    src: './wp-content/themes/storefront/src',
-    dist: './wp-content/themes/storefront/assets',
+    src: './wp-content/themes/onemohrstore/src',
+    dist: './wp-content/themes/onemohrstore/assets',
     proxy: 'https://shop.ddev.site'
 };
 

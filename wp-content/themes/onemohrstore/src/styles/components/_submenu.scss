@@ -1,0 +1,30 @@
+/* ==========================================================================
+    Primary Nav Subnavigation
+========================================================================== */
+
+.c-submenu {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: $gutter-xs;
+    padding: $gutter-xs;
+    background-color: $black--light;
+    color: $white;
+    z-index: 100;
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        display: none;
+    }
+}
+
+.c-submenu__item {
+    font-family: $font-body;
+    font-size: $font-base-sm;
+    font-size: rem(16px);
+    line-height: $heading-height;
+
+    &.is-current {
+        color: $gray--lighter;
+    }
+}

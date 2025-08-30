@@ -1,0 +1,159 @@
+/* ==========================================================================
+    Buttons
+========================================================================== */
+
+#{$all-buttons} {
+    position: relative;
+    display: inline-block;
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    color: inherit;
+    font-size: 100%; // Corrects font size not being inherited in all browsers
+    margin: 0;
+    vertical-align: baseline; // Improves appearance and consistency in all browsers
+    white-space: nowrap;
+    overflow: hidden;
+    appearance: none;
+
+    &:focus {
+        outline: $focus-outline;
+        outline-offset: $focus-offset;
+    }
+}
+
+#{$all-buttons-focus} {
+    outline-color: fade-out($yellow, 0.4);
+}
+
+#{$all-buttons-hover} {
+    background-color: transparent;
+    color: inherit;
+}
+
+/**
+ * === BOURBON MIXINS ===
+ */
+
+@mixin btn-style($bg: $black, $text: $white, $hover: $yellow) {
+    @include btn-color();
+    padding: $small-spacing $base-spacing;
+    font-family: $font-header;
+    font-size: $font-base;
+    font-weight: $font-extrabold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: rem(0.5px);
+    border: 3px $bg solid;
+    border-radius: $border-radius;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 0;
+        height: 10px;
+    }
+
+    &::after {
+        transition: all $speed;
+    }
+
+    // hover, focus
+    @include hocus {
+        background-color: transparent;
+        color: inherit;
+        transition: all $speed;
+
+        &::after {
+            left: 0;
+            width: 100%;
+        }
+    }
+
+    &:active {
+        background-color: $black;
+        color: $white;
+    }
+
+    // disabled buttons
+    &:disabled {
+        opacity: 1;
+        border-color: $gray;
+        background-color: transparent;
+        color: $gray;
+        cursor: not-allowed !important;
+
+        // hover, focus
+        @include hocus {
+            background-color: $white--dark;
+            color: $gray;
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
+
+/**
+ * === BUTTON CLASS ===
+ */
+
+.c-button {
+    @include btn-style();
+
+    &.is-primary {
+        @include btn-color($black, $yellow);
+    }
+
+    // &.is-secondary {
+    //     @include btn-style($black, $white);
+    // }
+
+    // &.is-tertiary {
+    //     @include btn-style($black, $white);
+    // }
+
+    &.is-inverse {
+        @include btn-color($white, $yellow);
+    }
+
+    // &.is-outline {
+    //     @include btn-style($black, $white);
+    // }
+
+    &:has(.c-button__icon) {
+        display: flex;
+        display: inline-flex;
+        align-items: baseline;
+        column-gap: $small-spacing;
+    }
+
+    .c-media__svg {
+        position: relative;
+        transition: all $speed $bezier-back;
+    }
+}
+
+.c-button--small {
+    padding: math.div($small-spacing, 2) math.div($base-spacing, 2);
+    font-size: $font-base;
+
+    &::after {
+        height: 6px;
+    }
+}
+
+/**
+ * === BUTTON GROUPS ===
+ */
+
+.c-button-group {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: $small-spacing;
+}

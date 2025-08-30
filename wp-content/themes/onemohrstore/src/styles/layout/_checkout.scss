@@ -1,0 +1,30 @@
+/* ==========================================================================
+    Woocommerce Checkout
+========================================================================== */
+
+$borders: 2px solid $white--darker;
+
+.t-page.is-checkout {
+
+    // Post Content
+    .wp-block-woocommerce-checkout {
+
+        .wp-block-woocommerce-checkout-order-summary-block {
+            border: $borders;
+            border-radius: $border-radius;
+        }
+
+        .wc-block-components-checkout-order-summary__title-text {
+            @include tagline();
+            margin-left: 16px
+        }
+
+    }
+
+    // Elements
+    .wc-block-components-button.wc-block-components-totals-coupon__button,
+    .wc-block-components-button.wc-block-components-checkout-place-order-button {
+        @include btn-style();
+    }
+
+}

@@ -1,53 +1,60 @@
 {
-  "name": "onemohrtime",
-  "description": "Wordpress theme for my personal design portfolio.",
-  "version": "3.0.0",
+  "name": "timber-wordpress-webpack",
+  "version": "1.0.0",
+  "description": "",
   "author": {
     "name": "Derek Mohr",
     "email": "derek@onemohrti.me",
-    "url": "https://onemohrti.me"
+    "url": "https://onemohrti.me/"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OneMohrTime/onemohrtime-website.git"
-  },
-  "license": "MIT",
   "main": "index.php",
   "scripts": {
     "dev": "npm run development",
-    "development": "mix",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "hot": "mix watch --hot",
+    "development": "npx mix",
+    "watch": "npx mix watch",
+    "watch-poll": "npx mix watch -- --watch-options-poll=1000",
+    "hot": "npx mix watch --hot",
     "build": "npm run production",
     "prod": "npm run production",
-    "production": "mix --production"
+    "production": "npx mix --production"
   },
   "browserslist": [
     "last 5 versions",
     "> 1%",
     "IE 10-11"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:OneMohrTime/timber-starter-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OneMohrTime/timber-starter-theme/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "22"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "laravel-mix": "^6.0.49",
+    "laravel-mix-imagemin": "^1.0.3",
+    "sass": "^1.77.6",
+    "sass-loader": "^12.6.0"
+  },
   "dependencies": {
-    "@fancyapps/ui": "^5.0.23",
+    "@fancyapps/ui": "^5.0.36",
+    "@floating-ui/dom": "^1.6.13",
     "bourbon": "^7.3.0",
+    "caniuse-lite": "^1.0.30001731",
     "css-reset-and-normalize": "^2.3.6",
-    "include-media": "^1.4.10",
+    "family.scss": "^1.0.8",
+    "gsap": "^3.12.5",
+    "include-media": "^2.0.0",
     "modujs": "^1.4.2",
     "modularload": "^1.2.8",
     "modularscroll": "^1.0.7",
-    "prismjs": "^1.29.0",
-    "swiper": "^10.3.1",
+    "swiper": "^11.1.4",
     "tippy.js": "^6.3.7"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.27.9",
-    "browser-sync-webpack-plugin": "^2.3.0",
-    "laravel-mix": "^6.0.43",
-    "laravel-mix-imagemin": "^1.0.3",
-    "resolve-url-loader": "^5.0.0",
-    "sass": "^1.49.9",
-    "sass-loader": "^12.6.0",
-    "webpack-cli": "^5.1.4"
   }
 }

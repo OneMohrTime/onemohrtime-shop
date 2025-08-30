@@ -1,0 +1,223 @@
+/* ==========================================================================
+    General Page Stucture
+========================================================================== */
+
+.o-page {
+    @include padding();
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 100%;
+    background-image: url("https://onemohrti.me/wp-content/uploads/concrete-light.png");
+    background-size: 298.5px 272.5px;
+    background-repeat: repeat;
+
+    // screen at or above 1500px
+    @include media(">=big") {
+        border-left: 3px solid $black;
+        border-right: 3px solid $black;
+    }
+}
+
+.o-page__sections {
+    display: flex;
+    flex-direction: column;
+    row-gap: $gutter;
+    padding-top: $gutter;
+
+    .is-image {
+        .c-media,
+        .c-media__image {
+            border-radius: $border-radius;
+        }
+    }
+
+    .is-image.is-full-width {
+        padding-left: 0;
+        padding-right: 0;
+
+        .c-caption {
+            opacity: 0;
+        }
+    }
+
+    .is-text-media {
+        .c-media,
+        .c-media__image {
+            border-radius: $border-radius;
+        }
+    }
+
+    .is-video {
+        position: relative;
+
+        .c-caption {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: auto;
+            height: $line-height;
+            padding: 0;
+            transform: translateX(-50%);
+            background-color: transparent;
+            color: $black--lightest;
+            z-index: 100;
+        }
+    }
+
+    .is-text,
+    .is-image,
+    .is-video,
+    .is-audio,
+    .is-text-media,
+    .is-grid-gallery,
+    .is-quotes,
+    .is-cards,
+    .is-script {
+        @include padding();
+    }
+
+    // screen at or above 1200px
+    @include media(">=large") {
+        row-gap: $gutter-lg;
+        padding-top: $gutter-lg
+    }
+}
+
+.o-page__related {
+    @include padding();
+    padding-top: $gutter;
+    padding-bottom: $gutter;
+
+    .u-subheadline {
+        margin-bottom: $small-spacing;
+    }
+
+    &.o-section.is-social-feed + & {
+        padding-top: 0
+    }
+}
+
+/**
+ * === WOOCOMMERCE ===
+ */
+
+.woocommerce-breadcrumb {
+    @include padding();
+    @include caption();
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+    line-height: $heading-height;
+    border-radius: $border-radius;
+    background-color: $white--dark;
+    z-index: 1;
+
+    a {
+        @include highlight-link();
+        &::before {
+            background-color: $white--darkest;
+        }
+    }
+
+    // screen at or above 600px
+    @include media(">=small") {
+        text-align: left;
+    }
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        position: absolute;
+        top: $small-spacing;
+        left: $gutter-lg;
+        padding: $small-spacing;
+    }
+
+    // screen at or above 1200px
+    @include media(">=large") {
+        left: $gutter-xl
+    }
+
+    // screen at or above 1500px
+    @include media(">=big") {
+        left: calc((100% - $container-width) / 2);
+    }
+}
+
+.woocommerce-error, .woocommerce-info, .woocommerce-message {
+    @include padding();
+    margin: 0;
+    border: 0;
+    background-color: $yellow;
+    color: $black;
+
+    &::before {
+        left: 1em;
+        color: $black--lightest;
+    }
+
+    a {
+        @include inline-link();
+        &::before {
+            bottom: rem(-3px);
+            background-color: $gold;
+        }
+    }
+
+    // screen at or above 1500px
+    @include media(">=big") {
+        border-left: 3px solid $black;
+        border-right: 3px solid $black;
+    }
+}
+
+.woocommerce-sorting {
+    @include padding();
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.woocommerce-result-count {
+    margin-bottom: $small-spacing;
+    font-size: $font-base-sm;
+    font-weight: $font-bold;
+    line-height: $heading-height;
+}
+
+.woocommerce-ordering {
+    font-size: $font-base-sm;
+
+    .orderby {
+        line-height: $heading-height;
+    }
+}
+
+.woocommerce-pagination {
+    margin-bottom: $gutter;
+    text-align: center;
+
+    .page-numbers {
+        display: flex;
+        justify-content: center;
+        column-gap: 0.5em;
+        margin: 0;
+        padding: 0;
+
+        a {
+            @include btn-style();
+            padding: math.div($small-spacing, 2) math.div($base-spacing, 2);
+            font-size: $font-base;
+
+            &::after {
+                height: 6px;
+            }
+        }
+
+        span.page-numbers.current {
+            padding: math.div($small-spacing, 2) math.div($base-spacing, 2);
+            font-size: $font-base;
+            border: 3px solid $gray--lightest;
+            border-radius: $border-radius;
+            color: $gray--lightest;
+        }
+    }
+}

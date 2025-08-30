@@ -1,0 +1,47 @@
+/* ==========================================================================
+    Card
+========================================================================== */
+
+.c-card {
+    position: relative;
+
+    .c-media {
+        max-width: calc(100% - $gutter);
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 10;
+    }
+
+    // Card Headline
+    .u-heading {
+        margin-bottom: $gutter-sm;
+        font-size: $font-h6;
+    }
+
+    strong {
+        color: $black--light;
+    }
+}
+
+.c-card__body {
+    position: relative;
+    padding: $gutter-sm;
+    transition: background-color $speed,
+                color $speed,
+                transform $speed;
+    border-radius: $border-radius;
+    background-color: $white--dark;
+    z-index: 9;
+}
+
+.c-card__link {
+    display: block;
+
+    @include hocus {
+        .c-card__body {
+            transform: translateY(-#{$gutter-xs});
+            background-color: $yellow;
+            color: $black;
+        }
+    }
+}

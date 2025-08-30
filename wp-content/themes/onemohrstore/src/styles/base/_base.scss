@@ -1,0 +1,90 @@
+/* ==========================================================================
+    Base
+========================================================================== */
+
+html {
+    // height: 100%;
+    font-size: 1em;
+    line-height: 1em;
+
+    // If Javascript is turned off...
+    // &.no-js {}
+}
+
+body {
+    position: relative;
+    width: 100%;
+    // height: 100%;
+    min-height: 100vh;
+    // overflow-x: hidden;
+    // overflow-y: auto;
+    font-family: $font-body;
+    // font-size: clamp(100%, 1rem + 2vw, 1.33em);
+    font-size: 1em;
+    background-color: $white--darker;
+    background-image: url("https://onemohrti.me/wp-content/uploads/graphy.png");
+    background-position: center center;
+    color: $black;
+
+    // crisp typography rendering
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &.no-scrollingPlz {
+        overflow: hidden;
+    }
+}
+
+/**
+ * === SITE ===
+ */
+
+.o-site {
+    position: relative;
+    display: block;
+    max-width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    transition: $speed linear;
+
+    &.-activeNavigationAreaUpTopButNotWhenScrolling {
+        overflow: hidden;
+    }
+
+    // screen at or above 1500px
+    @include media(">=big") {
+        display: flex;
+        flex-direction: column;
+        max-width: 1440px;
+        margin-top: $gutter;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: $gutter;
+    }
+
+    // screen at or above 1800px
+    @include media(">=huge") {
+        max-width: 1600px;
+        max-width: calc(100% - ($gutter-lg * 2));
+        margin-top: $gutter-lg;
+        margin-bottom: $gutter-lg;
+    }
+
+    // screen at or above 599px
+    @include media("<small") {
+        padding-bottom: rem(69px);
+    }
+}
+
+.o-site__main {
+    position: relative;
+    background-color: $white;
+    color: $black;
+
+    // screen at or above 1500px
+    @include media(">=big") {
+        flex: 1 0 auto;
+    }
+}

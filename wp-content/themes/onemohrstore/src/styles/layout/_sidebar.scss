@@ -1,0 +1,78 @@
+/* ==========================================================================
+    Sidebar
+========================================================================== */
+
+/**
+ * === COMPONENT ===
+ */
+
+.c-sidebar {
+
+    // screen at or above 600px
+    @include media(">=small") {}
+
+    // screen at or above 900px
+    @include media(">=medium") {}
+
+    // screen at or above 1200px
+    @include media(">=large") {}
+}
+
+/**
+ * === PARTIAL ===
+ */
+
+.o-sidebar {
+    @include padding();
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    padding-top: $gutter;
+    padding-bottom: $gutter;
+    background-color: $white--dark;
+}
+
+/**
+ * === SITE LAYOUT ===
+ */
+
+.o-site__main.has-sidebar {
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        .site-main {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .o-page {
+            flex: 1 1 percentage(7 / 12);
+            padding-right: $gutter;
+        }
+
+        .o-sidebar {
+            flex: 1 1 percentage(5 / 12);
+            padding-left: $gutter;
+        }
+    }
+
+    // screen at or above 1200px
+    @include media(">=large") {
+        .o-page {
+            flex-basis: 75%;
+        }
+        .o-sidebar {
+            flex-basis: 25%;
+        }
+    }
+
+    // screen at or above 1500px
+    @include media(">=big") {
+        .o-page {
+            border-right: 0;
+        }
+        .o-sidebar {
+            border-right: 3px solid $black;
+        }
+    }
+}

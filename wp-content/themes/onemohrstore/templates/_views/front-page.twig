@@ -1,0 +1,66 @@
+{# -- Base Page Layout -- #}
+{# ----------------------------------------------------------------- #}
+{% extends '_base/body.twig' %}
+
+{# -- Page Variables -- #}
+{# ----------------------------------------------------------------- #}
+{% set headline = post.meta('post_headline')|default(post.title) %}
+{% set subheadline = post.meta('post_subheadline')|default(null) %}
+
+{# -- Page Template -- #}
+{# ----------------------------------------------------------------- #}
+{% block content %}
+
+    <!-- Start `woocommerce_before_main_content` -->
+    {% do action('woocommerce_before_main_content') %}
+    <!-- End `woocommerce_before_main_content` -->
+
+    <article class="o-page">
+
+        <section class="c-banner is-homepage" data-module-scroll>
+            <div class="c-banner__heading">
+                <h1 class="u-title">{{ headline }}</h1>
+            </div>
+        </section>
+
+        <!-- Start `woocommerce_before_shop_loop` -->
+        {% do action('woocommerce_before_shop_loop') %}
+        <!-- End `woocommerce_before_shop_loop` -->
+
+        <div class="c-grid is-products">
+            {% for post in products %}
+                {% include '_components/tease-product.twig' with {
+                    product: {
+                        ID: post.id,
+                        title: post.title,
+                        content: post.content,
+                        excerpt: post.excerpt
+                    }
+                } only %}
+            {% endfor %}
+        </div>
+
+        <!-- Start `woocommerce_after_shop_loop` -->
+        {% do action('woocommerce_after_shop_loop') %}
+        <!-- End `woocommerce_after_shop_loop` -->
+
+        <section class="o-section is-contact" data-module-scroll>
+            {% include '_components/cta.twig' with {
+                params: {
+                    headline: 'Get In Touch',
+                    text: '<p>Looking to work on something? A brand refresh? A new website? An interview or podcast episode? A new logo?</p>',
+                    button: {
+                        url: 'https://onemohrti.me/contact',
+                        title: 'Contact Me'
+                    },
+                }
+            } only %}
+        </section>
+
+    </article>
+
+    <!-- Start `woocommerce_after_main_content` -->
+    {% do action('woocommerce_after_main_content') %}
+    <!-- End `woocommerce_after_main_content` -->
+
+{% endblock %}

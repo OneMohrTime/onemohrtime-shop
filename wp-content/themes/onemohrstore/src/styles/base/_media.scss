@@ -1,0 +1,42 @@
+/* ==========================================================================
+    Media
+========================================================================== */
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+embed,
+iframe,
+object {
+    max-width: 100%; // Make sure embeds and iframes fit their containers
+}
+
+.c-media {
+    position: relative;
+}
+
+/**
+ * === IMAGES ===
+ */
+
+.c-media__image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+/**
+ * === SVG ICONS ===
+ */
+
+.c-media__svg {
+    display: block;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    resize: both;
+}

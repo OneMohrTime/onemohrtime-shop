@@ -1,0 +1,28 @@
+/* ==========================================================================
+    Tooltip
+========================================================================== */
+
+.c-tooltip {
+    @include box-shadow();
+    display: none;
+    position: absolute;
+    width: auto;
+    width: max-content;
+    padding: rem(5px);
+    font-size: rem(15px);
+    font-weight: $font-bold;
+    border-radius: $border-radius;
+    background-color: $yellow;
+    color: $black--light;
+    z-index: 999;
+}
+
+.c-tooltip__anchor {
+    pointer-events: auto;
+}
+
+.c-tooltip__container {
+    position: relative;
+}
+
+// .c-tooltip--arrow {}

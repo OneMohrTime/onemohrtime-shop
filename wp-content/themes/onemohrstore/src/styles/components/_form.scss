@@ -1,0 +1,147 @@
+/* ==========================================================================
+    Forms
+========================================================================== */
+
+.c-form {
+    position: relative;
+
+    &.is-inline {
+        display: flex;
+        column-gap: $small-spacing;
+    }
+
+    .u-headline {
+        @include heading();
+    }
+}
+
+.c-form__widget {
+    margin-bottom: $gutter;
+}
+
+/**
+ * === INPUTS ===
+ */
+
+.c-form__input {
+    flex: 1 0 auto;
+    max-width: 100%;
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        border: 0;
+        background-color: transparent;
+        color: $white;
+        appearance: none;
+
+        &::placeholder {
+            color: $gray--lightest;
+        }
+    }
+}
+
+/**
+ * === CHECKBOXES ===
+ */
+
+.c-form__checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(8px);
+    margin-top: $small-spacing;
+
+    // screen at or above 600px
+    @include media(">=small") {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+}
+
+.c-form__checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    gap: rem(8px);
+
+    input[type="checkbox"] {
+        // Visually hide but keep accessible
+        position: absolute;
+        width: 0;
+        height: 0;
+        opacity: 0;
+
+        &:focus + .c-form__checkbox--box {
+            box-shadow: 0 0 0 3px $gold;
+        }
+
+        &:checked + .c-form__checkbox--box::after {
+            opacity: 1;
+        }
+    }
+
+    .c-form__checkbox--box {
+        position: relative;
+        display: inline-block;
+        width: 1.25em;
+        height: 1.25em;
+        margin: 0;
+        transition: border-color $speed $bezier-slide, background-color $speed $bezier-slide;
+        border: 2px solid $black--lightest;
+        border-radius: $border-radius;
+        background: transparent;
+
+        // Checkmark
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0.25em;
+            left: 0.25em;
+            width: 0.6em;
+            height: 0.35em;
+            opacity: 0;
+            transform: rotate(-45deg);
+            transition: opacity $speed $bezier-slide;
+            border: solid $black;
+            border-width: 0 0 3px 3px;
+            pointer-events: none;
+        }
+    }
+
+    &:hover .c-form__checkbox--box {
+        background: $white--darker;
+    }
+
+    .c-form__checkbox--label {
+        font-size: $font-base-sm;
+        font-weight: $font-bold;
+        letter-spacing: rem(0.25px);
+    }
+}
+
+/**
+ * === SELECTION ===
+ */
+
+.c-form__select {
+    margin-top: $small-spacing;
+}
+
+.c-form__select--input {
+    line-height: $heading-height;
+}
+
+/**
+ * === SUBMIT ===
+ */
+
+.c-form__submit {
+    flex: 1 0 auto;
+    max-width: percentage(1/3);
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        flex: 0 1 auto;
+    }
+}

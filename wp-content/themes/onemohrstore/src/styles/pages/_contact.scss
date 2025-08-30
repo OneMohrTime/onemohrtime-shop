@@ -1,0 +1,25 @@
+/* ==========================================================================
+    Contact
+========================================================================== */
+
+.t-page.is-contact {
+
+    // Contact Form
+    .c-contact {
+        @include padding();
+        padding-top: $gutter;
+
+        .wpforms-container {
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: $gutter;
+        }
+    }
+
+    // Sections
+    .o-page__sections {
+        padding-top: 0;
+        padding-bottom: $gutter;
+    }
+
+}

@@ -1,0 +1,64 @@
+{# -- Partial Variables -- #}
+{# ----------------------------------------------------------------- #}
+
+{% set categories = fn('get_terms', {
+    taxonomy: 'product_cat',
+    hide_empty: true
+}) %}
+{% set sizes = fn('get_terms', {
+    taxonomy: 'pa_size',
+    hide_empty: true
+}) %}
+
+{# -- Partial Template -- #}
+{# ----------------------------------------------------------------- #}
+
+<aside class="o-sidebar" data-module-filters>
+    <h2 class="u-screen-reader-text">Product Filters</h2>
+
+    <form class="c-form" method="get" data-filter-category>
+        {% if categories %}
+            <div class="c-form__widget">
+                <h3 class="u-headline">Categories</h3>
+                <div class="c-form__select">
+                    <select id="category-select" name="collection" class="c-form__select--input" data-filter-category>
+                        <option value="" {% if not fn('get_query_var', 'product_cat') %}selected{% endif %}>All Categories</option>
+                        {% for cat in categories %}
+                            <option value="{{ cat.slug }}" {% if cat.slug == fn('get_query_var', 'product_cat') %}selected{% endif %}>{{ cat.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        {% endif %}
+    </form>
+
+    <form class="c-form" method="get">
+
+        {% if sizes %}
+            <div class="c-form__widget">
+                <h3 class="u-headline">Size</h3>
+                <div class="c-form__checkboxes">
+                    {% for size in sizes %}
+                        <label class="c-form__checkbox">
+                            <input type="checkbox" name="filter_size[]" value="{{ size.term_id }}"
+                                {% if size.term_id in fn('get_query_var', 'filter_size', []) %}checked{% endif %}>
+                            <span class="c-form__checkbox--box"></span>
+                            <span class="c-form__checkbox--label">{{ size.name }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {# <h3>Price</h3>
+        <label>
+            Min: <input type="number" name="min_price" value="{{ fn('get_query_var', 'min_price', '') }}" min="0" step="1">
+        </label><br>
+        <label>
+            Max: <input type="number" name="max_price" value="{{ fn('get_query_var', 'max_price', '') }}" min="0" step="1">
+        </label><br> #}
+
+        <button type="submit" class="c-button">Apply Filters</button>
+
+    </form>
+</aside>
