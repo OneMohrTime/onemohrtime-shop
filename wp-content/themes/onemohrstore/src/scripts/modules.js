@@ -9,6 +9,7 @@
 // export { default as ChangeText } from './modules/ChangeText';
 // export { default as Example } from './modules/Example';
 export { default as Fancybox } from './modules/Fancybox';
+export { default as Filters } from './modules/Filters';
 // export { default as FitText } from './modules/FitText';
 // export { default as Load } from './modules/Load';
 export { default as Marquee } from './modules/Marquee';

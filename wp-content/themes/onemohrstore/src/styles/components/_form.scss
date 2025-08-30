@@ -12,7 +12,6 @@
 
     .u-headline {
         @include heading();
-        margin-bottom: math.div($small-spacing, 2);
     }
 }
 
@@ -41,6 +40,23 @@
     }
 }
 
+/**
+ * === CHECKBOXES ===
+ */
+
+.c-form__checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(8px);
+    margin-top: $small-spacing;
+
+    // screen at or above 600px
+    @include media(">=small") {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+}
+
 .c-form__checkbox {
     display: flex;
     align-items: center;
@@ -48,10 +64,6 @@
     position: relative;
     user-select: none;
     gap: rem(8px);
-
-    & + & {
-        margin-top: rem(4px);
-    }
 
     input[type="checkbox"] {
         // Visually hide but keep accessible
@@ -84,7 +96,7 @@
         &::after {
             content: "";
             position: absolute;
-            top: 0.15em;
+            top: 0.25em;
             left: 0.25em;
             width: 0.6em;
             height: 0.35em;
@@ -107,6 +119,22 @@
         letter-spacing: rem(0.25px);
     }
 }
+
+/**
+ * === SELECTION ===
+ */
+
+.c-form__select {
+    margin-top: $small-spacing;
+}
+
+.c-form__select--input {
+    line-height: $heading-height;
+}
+
+/**
+ * === SUBMIT ===
+ */
 
 .c-form__submit {
     flex: 1 0 auto;

@@ -17,6 +17,7 @@ class StarterSite extends Site {
         add_action('wp_enqueue_scripts', array($this, 'load_scripts'));
         add_action('widgets_init', array($this, 'create_sidebars'));
         add_action('pre_get_posts', array($this, 'custom_category_query_vars'));
+        add_action('woocommerce_product_query', [$this, 'filter_products_by_category']);
 
         add_filter('timber/context', array($this, 'add_to_context' ));
         add_filter('timber/twig', array($this, 'add_to_twig' ));
@@ -84,6 +85,64 @@ class StarterSite extends Site {
             $query->set('paged', $query->query_vars['paged']);
         }
         return $query;
+    }
+
+    /**
+     * Filter WooCommerce products by the selected categories in sidebar form
+     */
+    public function filter_products_by_category($q) {
+        // CATEGORIES
+        if (!empty($_GET['filter_category'])) {
+            $cat_ids = array_map('intval', (array) $_GET['filter_category']);
+            $tax_query = $q->get('tax_query') ?: [];
+            $tax_query[] = [
+                'taxonomy' => 'product_cat',
+                'field'    => 'term_id',
+                'terms'    => $cat_ids,
+            ];
+            $q->set('tax_query', $tax_query);
+        }
+        // ATTRIBUTES
+        $attribute_filters = [
+            'filter_size'   => 'pa_size',
+            'filter_finish' => 'pa_finish',
+            'filter_color'  => 'pa_color',
+        ];
+        $tax_query = $q->get('tax_query') ?: [];
+        foreach ($attribute_filters as $param => $taxonomy) {
+            if (!empty($_GET[$param])) {
+                $term_ids = array_map('intval', (array) $_GET[$param]);
+                $tax_query[] = [
+                    'taxonomy' => $taxonomy,
+                    'field'    => 'term_id',
+                    'terms'    => $term_ids,
+                ];
+            }
+        }
+        if ($tax_query) {
+            $q->set('tax_query', $tax_query);
+        }
+        // // PRICE
+        // $meta_query = $q->get('meta_query') ?: [];
+        // if (!empty($_GET['min_price'])) {
+        //     $meta_query[] = [
+        //         'key' => '_price',
+        //         'value' => floatval($_GET['min_price']),
+        //         'compare' => '>=',
+        //         'type' => 'NUMERIC',
+        //     ];
+        // }
+        // if (!empty($_GET['max_price'])) {
+        //     $meta_query[] = [
+        //         'key' => '_price',
+        //         'value' => floatval($_GET['max_price']),
+        //         'compare' => '<=',
+        //         'type' => 'NUMERIC',
+        //     ];
+        // }
+        // if ($meta_query) {
+        //     $q->set('meta_query', $meta_query);
+        // }
     }
 
     /**
