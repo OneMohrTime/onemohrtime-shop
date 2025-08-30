@@ -27,7 +27,7 @@
 
         {% include '_components/banner.twig' with {
             params: {
-                headline: headline,
+                headline: term.title ?? headline,
                 text: subheadline,
                 style: bannerType,
                 image: bannerImage,
@@ -41,18 +41,20 @@
         {% do action('woocommerce_before_shop_loop') %}
         <!-- End `woocommerce_before_shop_loop` -->
 
-        <div class="c-grid is-products">
-            {% for post in products %}
-                {% include '_components/tease-product.twig' with {
-                    product: {
-                        ID: post.id,
-                        title: post.title,
-                        content: post.content,
-                        excerpt: post.excerpt
-                    }
-                } only %}
-            {% endfor %}
-        </div>
+        {% if products %}
+            <div class="c-grid is-products">
+                {% for post in products %}
+                    {% include '_components/tease-product.twig' with {
+                        product: {
+                            ID: post.id,
+                            title: post.title,
+                            content: post.content,
+                            excerpt: post.excerpt
+                        }
+                    } only %}
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <!-- Start `woocommerce_after_shop_loop` -->
         {% do action('woocommerce_after_shop_loop') %}
@@ -60,7 +62,9 @@
     </article>
 
     {# Filters #}
-    {% include '_partials/sidebar.twig' %}
+    {% if products %}
+        {% include '_partials/sidebar.twig' %}
+    {% endif %}
 
     <!-- Start `woocommerce_after_main_content` -->
     {% do action('woocommerce_after_main_content') %}

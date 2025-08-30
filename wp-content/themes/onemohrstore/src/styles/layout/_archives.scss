@@ -7,9 +7,10 @@
     /**
      * === PRODUCT GRID ===
      */
-    // .c-grid.is-products {
-    //     @include padding();
-    // }
+    .c-grid.is-products {
+        margin-top: $gutter;
+        margin-bottom: $gutter;
+    }
 
     /**
      * === SEARCH RESULTS ===

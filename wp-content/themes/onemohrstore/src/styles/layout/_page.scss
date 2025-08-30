@@ -106,6 +106,62 @@
     @include caption();
     padding-top: 1em;
     padding-bottom: 1em;
+    text-align: center;
+    line-height: $heading-height;
+    border-radius: $border-radius;
+    background-color: $white--dark;
+    z-index: 1;
+
+    a {
+        @include highlight-link();
+        &::before {
+            background-color: $white--darkest;
+        }
+    }
+
+    // screen at or above 600px
+    @include media(">=small") {
+        text-align: left;
+    }
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        position: absolute;
+        top: $small-spacing;
+        left: $gutter-lg;
+        padding: $small-spacing;
+    }
+
+    // screen at or above 1200px
+    @include media(">=large") {
+        left: $gutter-xl
+    }
+
+    // screen at or above 1500px
+    @include media(">=big") {
+        left: calc((100% - $container-width) / 2);
+    }
+}
+
+.woocommerce-error, .woocommerce-info, .woocommerce-message {
+    @include padding();
+    margin: 0;
+    border: 0;
+    background-color: $yellow;
+    color: $black;
+
+    &::before {
+        left: 1em;
+        color: $black--lightest;
+    }
+
+    a {
+        @include inline-link();
+        &::before {
+            bottom: rem(-3px);
+            background-color: $gold;
+        }
+    }
 
     // screen at or above 1500px
     @include media(">=big") {
@@ -129,10 +185,14 @@
 
 .woocommerce-ordering {
     font-size: $font-base-sm;
+
+    .orderby {
+        line-height: $heading-height;
+    }
 }
 
 .woocommerce-pagination {
-    margin-top: $gutter;
+    margin-bottom: $gutter;
     text-align: center;
 
     .page-numbers {
@@ -150,6 +210,14 @@
             &::after {
                 height: 6px;
             }
+        }
+
+        span.page-numbers.current {
+            padding: math.div($small-spacing, 2) math.div($base-spacing, 2);
+            font-size: $font-base;
+            border: 3px solid $gray--lightest;
+            border-radius: $border-radius;
+            color: $gray--lightest;
         }
     }
 }

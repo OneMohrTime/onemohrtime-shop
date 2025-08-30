@@ -2,10 +2,75 @@
     Woocommerce Cart
 ========================================================================== */
 
+$borders: 2px solid $white--darker;
+
 .t-page.is-cart {
 
     // Post Content
     .wp-block-woocommerce-cart {
+
+        .wc-block-components-product-name {
+            @include tagline();
+        }
+
+        .wc-block-cart-items {
+            border-bottom: $borders;
+
+            // .wc-block-cart-items__row {}
+            // .wc-block-cart-item__product {}
+
+            .wc-block-cart-item__prices {
+                line-height: $line-height;
+            }
+
+            .price.wc-block-components-product-price {
+                font-weight: $font-bold;
+            }
+
+            .wc-block-components-product-metadata__description {
+                font-size: $font-base-sm;
+                line-height: $line-height;
+                color: $gray--dark;
+                p {
+                    margin: 0;
+                }
+            }
+
+            .wc-block-components-quantity-selector {
+                margin: 0 0 $small-spacing;
+                border: 2px solid $white--darkest;
+                border-radius: $border-radius;
+
+                & > .wc-block-components-quantity-selector__button--minus,
+                & > .wc-block-components-quantity-selector__button--plus {
+                    border: 0;
+                    border-radius: 0
+                }
+            }
+
+            .wc-block-cart-item__remove-link {
+                @include highlight-link();
+                &::before {
+                    background-color: $yellow;
+                }
+            }
+
+            td {
+                border-top: $borders;
+            }
+        }
+
+        .wc-block-components-totals-wrapper {
+            border-top: $borders;
+        }
+
+        .wp-block-woocommerce-cart-order-summary-totals-block {
+            border-top: 0;
+        }
+
+        .wp-block-woocommerce-cart-order-summary-block {
+            border-bottom: $borders;
+        }
 
         .wp-block-separator {
 
@@ -46,6 +111,7 @@
 
                 .wp-block-button__link.add_to_cart_button {
                     @include btn-style();
+                    background-color: transparent;
                 }
             }
         }
@@ -53,6 +119,7 @@
     }
 
     // Elements
+    .wc-block-components-button.wc-block-components-totals-coupon__button,
     .wc-block-components-button.wc-block-cart__submit-button {
         @include btn-style();
     }
