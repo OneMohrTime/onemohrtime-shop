@@ -95,18 +95,24 @@
         font-size: $font-h6;
     }
 
-    // screen at or above 900px
-    @include media(">=medium") {
+    // screen at or above 600px
+    @include media(">=small") {
         flex-basis: percentage(1/3);
         max-width: calc(percentage(1/3) - ($gutter / 3 * 2));
+    }
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        flex-basis: 50%;
+        max-width: calc(50% - $gutter-sm);
 
         .woocommerce-loop-product__title {
             margin-top: $gutter-xs;
         }
     }
 
-    // screen at or above 900px
-    @include media(">=medium") {
+    // screen at or above 1200px
+    @include media(">=large") {
         flex-basis: 25%;
         max-width: calc(25% - ($gutter / 4 * 3));
 
