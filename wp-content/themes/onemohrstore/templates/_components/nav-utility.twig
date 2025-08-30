@@ -21,10 +21,6 @@
         {% endfor %}
     </ul>
 
-    <div class="c-utility__search">
-        {{ fn('get_product_search_form') }}
-    </div>
-
     {# <div class="c-utility__account">
         {% if fn('is_user_logged_in') %}
             <a href="{{ site.url }}/my-account">My Account</a>
@@ -33,9 +29,9 @@
         {% endif %}
     </div> #}
 
-    <div class="c-utility__cart">
+    {# <div class="c-utility__cart">
         <a href="{{ fn('wc_get_checkout_url') }}" class="u-link">View Cart</a>
-    </div>
+    </div> #}
 
 </div>
 {% endif %}

@@ -13,6 +13,14 @@
 
 <nav class="c-navigation">
 
+    <div class="c-navigation__toggle">
+        <button class="c-hamburger" data-toggle-menu>
+            <span class="c-hamburger__line"></span>
+            <span class="c-hamburger__line"></span>
+            <span class="c-hamburger__line"></span>
+        </button>
+    </div>
+
     {% if this.menu %}
         <ul class="c-navigation__menu is-hidden">
 
@@ -82,6 +90,9 @@
     </a>
 
     <div class="c-navigation__search">
+        <button type="button" class="icon-trigger">
+            {{ source('_elements/svg/search.svg') }}
+        </button>
         {{ fn('get_product_search_form') }}
     </div>
 
@@ -93,14 +104,6 @@
             {% endif %}
         </a>
         <div id="view_cart" class="c-tooltip" role="tooltip">View Cart</div>
-    </div>
-
-    <div class="c-navigation__toggle">
-        <button class="c-hamburger" data-toggle-menu>
-            <span class="c-hamburger__line"></span>
-            <span class="c-hamburger__line"></span>
-            <span class="c-hamburger__line"></span>
-        </button>
     </div>
 
 </nav>

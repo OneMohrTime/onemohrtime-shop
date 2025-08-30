@@ -5,7 +5,7 @@
 .c-hamburger {
     display: block;
     width: 30px;
-    height: 18px;
+    height: 30px;
     padding-left: 0;
     padding-right: 0;
     border: none;
@@ -13,19 +13,19 @@
     cursor: pointer;
     appearance: none;
 
-    // Mobile Menu Activated
-    .is-active & {
-        .c-hamburger {
-            transform: scale(0.9);
-        }
-    }
+    // // Mobile Menu Activated
+    // .is-active & {
+    //     .c-hamburger {
+    //         transform: scale(0.9);
+    //     }
+    // }
 }
 
 .c-hamburger__line {
     position: relative;
     display: block;
     width: 100%;
-    height: 2px;
+    height: 3px;
     transition: all $speed $bezier-slide;
     background-color: $white;
 
@@ -35,7 +35,7 @@
 
         // open menu
         .is-active & {
-            margin-top: 7px;
+            margin-top: 6px;
         }
     }
 

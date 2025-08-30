@@ -29,13 +29,10 @@
  */
 
 .c-submenu {
-    padding-left: $gutter-sm;
-    padding-right: $gutter-sm;
+    position: relative;
 
     // screen at or above 900px
     @include media(">=medium") {
         position: absolute;
-        padding-left: 0;
-        padding-right: 0;
     }
 }

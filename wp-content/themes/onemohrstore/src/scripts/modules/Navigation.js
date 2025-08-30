@@ -20,7 +20,9 @@ export default class extends es6Module {
     this.header = null;
     this.navigation = null;
     this.menu = null;
+    this.search = null;
     this.toggleMenu = null;
+    this.searchForm = null;
   }
 
   // Init module
@@ -30,7 +32,9 @@ export default class extends es6Module {
     this.header     = this.el;
     this.navigation = this.header.querySelector('.c-navigation');
     this.menu       = this.header.querySelector('.c-navigation__menu');
+    this.search     = this.header.querySelector('.c-navigation__search button');
     this.toggleMenu = this.header.querySelector('.c-navigation__toggle');
+    this.searchForm = this.header.querySelector('.o-header__search');
 
     // Functions
     this.handleScroll();
@@ -46,6 +50,16 @@ export default class extends es6Module {
         this.handleMobileDropdowns();
         // Mega menu support
         this.handleMegaMenu();
+      });
+    }
+
+    // Attach click event listener to the search button
+    const searchButton = this.search;
+    if (searchButton) {
+      searchButton.addEventListener('click', () => {
+
+        // Open primary navigation
+        this.toggleSearch();
       });
     }
 
@@ -267,6 +281,13 @@ export default class extends es6Module {
         }
       });
     });
+  }
+
+  // Search Form Toggle
+  // =========================================================================
+  toggleSearch() {
+    this.searchForm.classList.toggle('is-hidden');
+    this.searchForm.classList.toggle('is-visible');
   }
 
   // Destroy
