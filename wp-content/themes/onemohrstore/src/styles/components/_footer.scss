@@ -9,13 +9,6 @@
     background-size: 298.5px 272.5px;
     color: $white;
 
-    // screen at or above 900px
-    @include media(">=medium") {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
     // screen at or above 1500px
     @include media(">=big") {
         border-bottom-left-radius: $border-radius;
@@ -23,87 +16,68 @@
     }
 }
 
-.c-footer__branding {
-    margin-bottom: $gutter;
+.c-footer__portfolio {
+    @include padding();
     padding-top: $gutter;
-    padding-left: $gutter-sm;
-    padding-right: $gutter-sm;
     padding-bottom: $gutter;
-    text-align: center;
-
-    .c-media__svg,
-    .c-media__image {
-        max-height: 100px;
-        max-width: 230px;
-    }
-
-    .u-wysiwyg {
-        margin-top: $small-spacing;
-    }
 
     // screen at or above 600px
     @include media(">=small") {
-        padding-top: $gutter;
-        padding-left: $gutter;
-        padding-right: $gutter;
+        display: flex;
+        align-items: flex-start;
+        gap: $gutter;
     }
 
-    // screen at or above 900px
-    @include media(">=medium") {
-        flex: 1 0 30%;
-        margin-bottom: 0;
-        padding-left: $gutter-lg;
-        padding-right: 0;
-    }
-
-    // screen at or above 1200px
+    // screen at or above12600px
     @include media(">=large") {
-        flex-basis: 25%;
-        padding-left: $gutter-xl;
-    }
-
-    // screen at or above 1500px
-    @include media(">=big") {
-        padding-left: calc(((100% - $container-width) / 2) * 2);
-    }
-
-    // screen at or above 1800px
-    @include media(">=huge") {
-        flex-basis: 30%;
-        padding-left: calc((100% - $container-width) / 2);
+        align-items: center;
     }
 }
 
-.c-footer__portfolio {
-    margin-bottom: $gutter;
-    padding-left: $gutter-sm;
-    padding-right: $gutter-sm;
+.c-footer__portfolio--logo {
+    max-height: 72px;
 
-    // screen at or above 600px
-    @include media(">=small") {
-        padding-left: $gutter;
-        padding-right: $gutter;
+    .c-media__image,
+    .c-media__svg {
+        width: auto;
+        height: rem(72px);
+        margin-left: auto;
+        margin-right: auto;
     }
 
     // screen at or above 900px
     @include media(">=medium") {
-        flex: 1 0 30%;
-        margin-bottom: 0;
-        padding-top: $gutter;
-        padding-left: $gutter-sm;
-        padding-right: 0;
-        padding-bottom: $gutter;
+        height: rem(120px);
+        margin: 0;
+    }
+}
+
+.c-footer__portfolio--info {
+    display: flex;
+    flex-direction: column;
+    gap: $gutter-xs;
+    margin-top: $gutter;
+
+    .c-menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $gutter-xs;
+    }
+
+    // screen at or above 600px
+    @include media(">=small") {
+        margin-top: 0;
     }
 
     // screen at or above 1200px
     @include media(">=large") {
-        flex-basis: 25%;
-        padding-left: $gutter-lg;
-    }
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
 
-    // screen at or above 1800px
-    @include media(">=huge") {
-        flex-basis: 30%;
+        .u-subheadline {
+            line-height: 1em;
+        }
     }
 }
 

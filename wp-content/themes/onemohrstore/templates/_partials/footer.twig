@@ -20,12 +20,32 @@
         <h2 class="u-screen-reader-text">Footer Info</h2>
 
         <nav class="c-footer__portfolio">
-            <h3 class="u-subheadline">Explore More:</h3>
-            <ul class="c-menu">
-                <li class="c-menuItem">
-                    <a href="" class="c-button is-inverse">Logo Design</a>
-                </li>
-            </ul>
+            <figure class="c-footer__portfolio--logo">
+                <a href="{{ this.siteUrl }}">
+                    {{ source('_elements/svg/logo.svg') }}
+                </a>
+            </figure>
+            <div class="c-footer__portfolio--info">
+                {# <h3 class="u-subheadline">Explore More:</h3> #}
+                <ul class="c-menu">
+                    <li class="c-menuItem">
+                        <a href="https://onemohrti.me/services/logo-design" class="c-button is-inverse" target="_blank" rel="noopener noreferrer nofollow">Logo Design</a>
+                    </li>
+                    <li class="c-menuItem">
+                        <a href="https://onemohrti.me/services/branding" class="c-button is-inverse" target="_blank" rel="noopener noreferrer nofollow">Branding</a>
+                    </li>
+                    <li class="c-menuItem">
+                        <a href="https://onemohrti.me/services/web-design" class="c-button is-inverse" target="_blank" rel="noopener noreferrer nofollow">Web Design</a>
+                    </li>
+                    <li class="c-menuItem">
+                        <a href="https://onemohrti.me/design" class="c-button is-inverse" target="_blank" rel="noopener noreferrer nofollow">Full Portfolio</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="c-footer__utility">
+            <p>&copy; 2011 &ndash; {{ 'now'|date('Y') }} | Derek Mohr | <a href="https://onemohrti.me/" class="u-highlight">OneMohrTime Design Co.</a></p>
             <ul class="c-menu">
                 {% for profile in this.social %}
                     {% set profile = profile.profile %}
@@ -36,10 +56,6 @@
                     </li>
                 {% endfor %}
             </ul>
-        </nav>
-
-        <div class="c-footer__utility">
-            <p>&copy; 2011 &ndash; {{ 'now'|date('Y') }} | Derek Mohr | <a href="https://onemohrti.me/" class="u-highlight">OneMohrTime Design Co.</a></p>
             <ul class="c-footer__legal c-menu">
                 <li class="c-menuItem">
                     <a href="https://onemohrti.me/privacy-policy" class="u-highlight">Privacy</a>
