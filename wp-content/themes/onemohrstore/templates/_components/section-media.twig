@@ -9,7 +9,7 @@
 {# -- Component Template -- #}
 
 {% if this.mediaSection %}
-<section class="o-section is-{{ this.mediaSection.media_type }}{% if this.mediaSection.image_type == 'full' %} is-full-width{% endif %}" data-module-scroll>
+<section class="o-section is-{{ this.mediaSection.media_type }}{% if this.mediaSection.image_type == 'full' %} is-full-width{% endif %}">
     {% switch this.mediaSection.media_type %}
 
         {% case 'image' %}
