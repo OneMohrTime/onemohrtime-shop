@@ -40,7 +40,7 @@ $color--success: $green;
 $color--warning: $yellow;
 $color--error: $red;
 
-$focus-outline: 3px solid fade-out($yellow, 0.6);
+$focus-outline: 3px solid fade-out($yellow, 0.15);
 $focus-offset: 2px;
 
 // Social Networks
@@ -125,6 +125,8 @@ $bezier-slide: cubic-bezier(0, 0, 0.2, 1);
 // Widths
 $container-width: (1440px - 72px);
 $inner-width: 1280px;
+$maximum-width: 1920px;
+$minimum-width: 375px;
 $copy-width: 80ch;
 $padding: math.div($container-width - $inner-width, 2);
 

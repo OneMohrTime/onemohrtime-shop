@@ -118,6 +118,31 @@ $borders: 2px solid $white--darker;
 
     }
 
+    // Checkout
+    .woocommerce-cart-form {
+        .actions {
+            .button {
+                @include btn-style();
+            }
+        }
+        .coupon {
+            display: flex
+        }
+    }
+
+    // Totals
+    .cart-collaterals {
+        h2 {
+            @include heading();
+        }
+        .checkout-button.button {
+            @include btn-style();
+        }
+        .ppc-button-wrapper {
+            margin-top: 1em;
+        }
+    }
+
     // Elements
     .wc-block-components-button.wc-block-components-totals-coupon__button,
     .wc-block-components-button.wc-block-cart__submit-button {

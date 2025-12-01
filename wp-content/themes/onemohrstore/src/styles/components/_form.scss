@@ -13,6 +13,10 @@
     .u-headline {
         @include heading();
     }
+
+    .u-subheadline {
+        @include lead();
+    }
 }
 
 .c-form__widget {
