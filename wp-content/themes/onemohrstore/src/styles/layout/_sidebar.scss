@@ -30,6 +30,13 @@
     padding-top: $gutter;
     padding-bottom: $gutter;
     background-color: $white--dark;
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: $focus-outline;
+        outline-offset: $focus-offset;
+    }
 }
 
 /**
