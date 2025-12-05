@@ -53,12 +53,12 @@
         }
 
         .o-page {
-            flex: 1 1 percentage(7 / 12);
+            flex: 1 1 percentage(15 / 24);
             padding-right: $gutter;
         }
 
         .o-sidebar {
-            flex: 1 1 percentage(5 / 12);
+            flex: 1 1 percentage(9 / 24);
             padding-left: $gutter;
         }
     }

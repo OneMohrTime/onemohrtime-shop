@@ -6,6 +6,11 @@ $borders: 2px solid $white--darker;
 
 .t-page.is-cart {
 
+    .o-page {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     // Post Content
     .wp-block-woocommerce-cart {
 
