@@ -53,8 +53,8 @@
                     <select id="category-select" name="collection" class="c-form__select--input" data-filter-category>
                         <option value="" {% if not fn('get_query_var', 'product_cat') %}selected{% endif %}>All Categories</option>
                         {% for cat in categories %}
-                            {% set cat_count = cat.count %}
-                            <option value="{{ cat.slug }}" {% if cat.slug == fn('get_query_var', 'product_cat') %}selected{% endif %}>{{ cat.name }} ({{ cat_count }})</option>
+                            {# {% set cat_count = cat.count %} #}
+                            <option value="{{ cat.slug }}" {% if cat.slug == fn('get_query_var', 'product_cat') %}selected{% endif %}>{{ cat.name }}{# ({{ cat_count }})#}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -71,65 +71,17 @@
                 <h4 class="u-subheadline">Sizes</h4>
                 <div class="c-form__checkboxes">
                     {% for size in sizes %}
-                        {% set size_count = size.count %}
+                        {# {% set size_count = size.count %} #}
                         <label class="c-form__checkbox">
                             <input type="checkbox" name="filter_size[]" value="{{ size.term_id }}"
                                 {% if size.term_id in fn('get_query_var', 'filter_size', []) %}checked{% endif %}>
                             <span class="c-form__checkbox--box"></span>
-                            <span class="c-form__checkbox--label">{{ size.name }} ({{ size_count }})</span>
+                            <span class="c-form__checkbox--label">{{ size.name }}{# ({{ size_count }})#}</span>
                         </label>
                     {% endfor %}
                 </div>
             </div>
         {% endif %}
-
-            {# Price Range Checkboxes #}
-            {% set price_ranges = [
-                { min: 0, max: 25 },
-                { min: 25, max: 50 },
-                { min: 50, max: 100 },
-                { min: 100, max: 200 },
-                { min: 200, max: null }
-            ] %}
-            <div class="c-form__widget">
-                <h4 class="u-subheadline">Price Range</h4>
-                <div class="c-form__checkboxes">
-                    {% for range in price_ranges %}
-                        {% set args = {
-                            post_type: 'product',
-                            posts_per_page: -1,
-                            meta_query: [
-                                {
-                                    key: '_price',
-                                    value: range.min,
-                                    compare: '>=',
-                                    type: 'NUMERIC'
-                                },
-                                {
-                                    key: '_price',
-                                    value: range.max is not null ? range.max : 999999,
-                                    compare: '<=',
-                                    type: 'NUMERIC'
-                                }
-                            ]
-                        } %}
-                        {% set product_ids = fn('get_posts', args) %}
-                        {% if product_ids|length > 0 %}
-                            {% set label = range.max is not null
-                                ? ('$' ~ range.min ~ '–$' ~ range.max)
-                                : ('$' ~ range.min ~ '+')
-                            %}
-                            {% set value = range.min ~ '-' ~ (range.max is not null ? range.max : 'max') %}
-                            <label class="c-form__checkbox">
-                                <input type="checkbox" name="filter_price[]" value="{{ value }}"
-                                    {% if value in fn('get_query_var', 'filter_price', []) %}checked{% endif %}>
-                                <span class="c-form__checkbox--box"></span>
-                                <span class="c-form__checkbox--label">{{ label }} ({{ product_ids|length }})</span>
-                            </label>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
 
         <button type="submit" class="c-button">Apply Filters</button>
 
