@@ -12,6 +12,12 @@
 
     .u-headline {
         @include heading();
+        margin-bottom: $small-spacing;
+    }
+
+    .u-subheadline {
+        @include lead();
+        margin-bottom: 0.33em;
     }
 }
 
@@ -73,7 +79,8 @@
         opacity: 0;
 
         &:focus + .c-form__checkbox--box {
-            box-shadow: 0 0 0 3px $gold;
+            box-shadow: 0 0 0 $focus-offset $white--dark,
+                        0 0 0 ($focus-offset * 2) $yellow;
         }
 
         &:checked + .c-form__checkbox--box::after {

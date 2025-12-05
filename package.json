@@ -32,7 +32,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": "22"
+    "node": "24"
   },
   "devDependencies": {
     "browser-sync": "^3.0.2",

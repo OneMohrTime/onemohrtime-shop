@@ -6,6 +6,11 @@ $borders: 2px solid $white--darker;
 
 .t-page.is-cart {
 
+    .o-page {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     // Post Content
     .wp-block-woocommerce-cart {
 
@@ -116,6 +121,31 @@ $borders: 2px solid $white--darker;
             }
         }
 
+    }
+
+    // Checkout
+    .woocommerce-cart-form {
+        .actions {
+            .button {
+                @include btn-style();
+            }
+        }
+        .coupon {
+            display: flex
+        }
+    }
+
+    // Totals
+    .cart-collaterals {
+        h2 {
+            @include heading();
+        }
+        .checkout-button.button {
+            @include btn-style();
+        }
+        .ppc-button-wrapper {
+            margin-top: 1em;
+        }
     }
 
     // Elements

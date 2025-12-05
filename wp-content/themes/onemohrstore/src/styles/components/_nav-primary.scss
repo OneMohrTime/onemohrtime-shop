@@ -119,15 +119,32 @@
 .c-navigation__menuItem {
     @include heading();
     flex: 1 1 50%;
-    display: flex;
-    align-items: flex-start;
-    column-gap: $gutter-sm;
     font-family: $font-header;
     font-weight: $font-bold;
     line-height: $line-height;
 
     &.is-current {
-        color: $gray--dark;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: calc(50% - rem(12px));
+            bottom: 1px;
+            display: block;
+            width: rem(24px);
+            height: rem(3px);
+            opacity: 1;
+            transition: opacity $speed $bezier-slide;
+            transition-delay: $speed-fast;
+            background-color: $yellow;
+        }
+
+        @include hocus {
+            &::after {
+                opacity: 0;
+            }
+        }
     }
 
     .c-media__svg {
@@ -137,24 +154,26 @@
     }
 
     .u-nav-link {
-        flex: 0 1 auto;
-        @include hocus {
-            color: $yellow;
+        --bg-height: 3px !important;
+        @include multiline-link(true);
+        &:focus {
+            border-radius: $border-radius;
+            outline: $focus-outline;
+            outline-offset: $focus-offset;
+        }
+        &:active {
+            color: $white--darkest;
         }
     }
 
-    // screen at or above 900px
-    @include media(">=medium") {
+    // screen at or above 1200px
+    @include media(">=large") {
         flex: 0 1 auto;
+        margin-right: 0.5em;
         font-size: $font-h6;
         font-weight: $font-heavy;
         letter-spacing: rem(1.5px);
     }
-
-    // // screen at or above 1200px
-    // @include media(">=large") {
-    //     margin-left: $small-spacing;
-    // }
 }
 
 /**
@@ -178,12 +197,22 @@
     .c-media__image {
         max-height: 44px;
         max-width: 220px;
+        transition: fill $speed-fast $bezier-slide;
+        fill: $white;
     }
 
     // screen at or above 600px
     @include media(">=small") {
         top: 0;
+        transition: background $speed-fast $bezier-slide;
         z-index: 50;
+
+        @include hocus {
+            background-color: $yellow;
+            .c-media__image {
+                fill: $black;
+            }
+        }
     }
 
     // screen at or above 1200px

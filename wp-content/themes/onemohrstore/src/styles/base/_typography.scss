@@ -59,6 +59,7 @@ h6 {
 
 .u-wysiwyg {
     @include content-width();
+    @include fluid-body-copy();
     line-height: $line-height;
 
     h1, h2, h3, h4, h5, h6 {
@@ -77,11 +78,12 @@ h6 {
     }
 
     p, ul, ol {
+        font-size: inherit;
         line-height: inherit;
-    }
 
-    p + p {
-        margin-top: math.div($line-height, 2);
+        & + p, ul, ol {
+            margin-top: math.div($line-height, 2);
+        }
     }
 }
 
@@ -250,8 +252,18 @@ abbr {
 }
 
 mark {
-    background-color: $gold;
+    display: inline-block;
+    padding: 0 0.15em;
+    transform: rotate(-2deg);
+    border: 0;
+    border-radius: $border-radius;
+    background-color: $yellow;
     color: $black;
+    box-shadow: 0 0 0 3px $yellow;
+
+    @include hocus {
+        transform: rotate(0);
+    }
 }
 
 blockquote {
@@ -273,7 +285,7 @@ blockquote {
             margin-top: 1em;
             padding-left: 1.5em;
             font-style: normal;
-            font-weight: 700;
+            font-weight: $font-bold;
         }
 
         &::before {

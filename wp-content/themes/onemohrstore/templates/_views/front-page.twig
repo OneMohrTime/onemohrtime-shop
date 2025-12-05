@@ -17,7 +17,7 @@
 
     <article class="o-page">
 
-        <section class="c-banner is-homepage" data-module-scroll>
+        <section class="c-banner is-homepage">
             <div class="c-banner__heading">
                 <h1 class="u-title">{{ headline }}</h1>
             </div>
@@ -44,7 +44,7 @@
         {% do action('woocommerce_after_shop_loop') %}
         <!-- End `woocommerce_after_shop_loop` -->
 
-        <section class="o-section is-contact" data-module-scroll>
+        <section class="o-section is-contact">
             {% include '_components/cta.twig' with {
                 params: {
                     headline: 'Get In Touch',

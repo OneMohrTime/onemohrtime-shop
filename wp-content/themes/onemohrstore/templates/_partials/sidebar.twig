@@ -5,10 +5,39 @@
     taxonomy: 'product_cat',
     hide_empty: true
 }) %}
-{% set sizes = fn('get_terms', {
-    taxonomy: 'pa_size',
-    hide_empty: true
-}) %}
+
+{# If a category is selected, get product IDs in that category #}
+{% set current_cat = fn('get_query_var', 'product_cat') %}
+{% if current_cat %}
+    {% set product_ids = fn('get_posts', {
+        post_type: 'product',
+        tax_query: [{
+            taxonomy: 'product_cat',
+            field: 'slug',
+            terms: current_cat
+        }],
+        fields: 'ids',
+        posts_per_page: -1
+    }) %}
+    {# Get all size term IDs used by these products #}
+    {% set used_size_ids = fn('get_terms', {
+        taxonomy: 'pa_size',
+        hide_empty: false,
+        object_ids: product_ids
+    })|map(term => term.term_id) %}
+    {# Get only sizes that are used in this category #}
+    {% set sizes = fn('get_terms', {
+        taxonomy: 'pa_size',
+        hide_empty: true,
+        include: used_size_ids
+    }) %}
+{% else %}
+    {# No category selected, show all sizes #}
+    {% set sizes = fn('get_terms', {
+        taxonomy: 'pa_size',
+        hide_empty: true
+    }) %}
+{% endif %}
 
 {# -- Partial Template -- #}
 {# ----------------------------------------------------------------- #}
@@ -24,7 +53,8 @@
                     <select id="category-select" name="collection" class="c-form__select--input" data-filter-category>
                         <option value="" {% if not fn('get_query_var', 'product_cat') %}selected{% endif %}>All Categories</option>
                         {% for cat in categories %}
-                            <option value="{{ cat.slug }}" {% if cat.slug == fn('get_query_var', 'product_cat') %}selected{% endif %}>{{ cat.name }}</option>
+                            {# {% set cat_count = cat.count %} #}
+                            <option value="{{ cat.slug }}" {% if cat.slug == fn('get_query_var', 'product_cat') %}selected{% endif %}>{{ cat.name }}{# ({{ cat_count }})#}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -34,29 +64,24 @@
 
     <form class="c-form" method="get">
 
+        <h3 class="u-headline">Filters</h3>
+
         {% if sizes %}
             <div class="c-form__widget">
-                <h3 class="u-headline">Size</h3>
+                <h4 class="u-subheadline">Sizes</h4>
                 <div class="c-form__checkboxes">
                     {% for size in sizes %}
+                        {# {% set size_count = size.count %} #}
                         <label class="c-form__checkbox">
                             <input type="checkbox" name="filter_size[]" value="{{ size.term_id }}"
                                 {% if size.term_id in fn('get_query_var', 'filter_size', []) %}checked{% endif %}>
                             <span class="c-form__checkbox--box"></span>
-                            <span class="c-form__checkbox--label">{{ size.name }}</span>
+                            <span class="c-form__checkbox--label">{{ size.name }}{# ({{ size_count }})#}</span>
                         </label>
                     {% endfor %}
                 </div>
             </div>
         {% endif %}
-
-        {# <h3>Price</h3>
-        <label>
-            Min: <input type="number" name="min_price" value="{{ fn('get_query_var', 'min_price', '') }}" min="0" step="1">
-        </label><br>
-        <label>
-            Max: <input type="number" name="max_price" value="{{ fn('get_query_var', 'max_price', '') }}" min="0" step="1">
-        </label><br> #}
 
         <button type="submit" class="c-button">Apply Filters</button>
 

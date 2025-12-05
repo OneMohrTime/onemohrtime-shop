@@ -139,6 +139,11 @@
 
     // screen at or above 1500px
     @include media(">=big") {
+        left: $gutter-lg;
+    }
+
+    // screen at or above 1800px
+    @include media(">=huge") {
         left: calc((100% - $container-width) / 2);
     }
 }

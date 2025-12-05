@@ -160,6 +160,12 @@
 
     // screen at or above 1500px
     @include media(">=big") {
+        padding-left: $gutter-lg;
+        padding-right: $gutter-lg;
+    }
+
+    // screen at or above 1800px
+    @include media(">=huge") {
         padding-left: calc((100% - $container-width) / 2);
         padding-right: calc((100% - $container-width) / 2);
     }
@@ -169,9 +175,9 @@
         // nothing, continue on
     } @else if $multiplier == '2x' {
         // screen at or above 1500px
-        @include media(">=big") {
-            padding-left: calc(((100% - $container-width) / 2) * 2);
-            padding-right: calc(((100% - $container-width) / 2) * 2);
+        @include media(">=huge") {
+            padding-left: calc((100% - $container-width) / 2);
+            padding-right: calc((100% - $container-width) / 2);
         }
     }
 }
@@ -266,6 +272,14 @@
 }
 
 /**
+ * === CURSORS ===
+ */
+
+@mixin cursor-img($name) {
+    cursor: url('../img/cursors/#{$name}.png') 10 0, auto;
+}
+
+/**
  * === TYPE STYLES ===
  */
 
@@ -286,8 +300,8 @@
     text-transform: uppercase;
     letter-spacing: -1.5px;
 
-    // screen below 599px
-    @include media("<small") {
+    // screen below 899px
+    @include media("<medium") {
         font-size: $font-h2;
         font-size: 2.5em;
         letter-spacing: normal;
@@ -305,8 +319,8 @@
     text-transform: uppercase;
     letter-spacing: -0.5px;
 
-    // screen below 599px
-    @include media("<small") {
+    // screen below 899px
+    @include media("<medium") {
         font-size: 2.25em;
         letter-spacing: normal;
         hyphens: auto;
@@ -321,8 +335,8 @@
     font-size: $font-h3;
     text-transform: uppercase;
 
-    // screen below 599px
-    @include media("<=small") {
+    // screen below 899px
+    @include media("<=medium") {
         font-size: 2em;
     }
 
@@ -335,8 +349,8 @@
     font-size: $font-h4;
     text-transform: uppercase;
 
-    // screen below 599px
-    @include media("<=small") {
+    // screen below 899px
+    @include media("<=medium") {
         font-size: 1.75em;
     }
 
@@ -353,9 +367,22 @@
     text-transform: uppercase;
     margin: 0;
 
-    // screen below 599px
-    @include media("<=small") {
+    // screen below 899px
+    @include media("<=medium") {
         font-size: $font-h6;
+    }
+}
+
+@mixin lead($underline: null) {
+    font-size: $font-h5;
+
+    // screen below 899px
+    @include media("<=medium") {
+        font-size: 1.5em;
+    }
+
+    @if $underline == "underlined" {
+        @include underlined();
     }
 }
 
@@ -368,8 +395,11 @@
     }
 }
 
+@mixin fluid-body-copy($min: $font-base-sm, $max: $font-base-lg, $min-vw: $minimum-width, $max-vw: $container-width) {
+    font-size: clamp($font-base-sm, 0.75rem + 1vw, $font-base-lg);
+}
+
 @mixin base-font-size() {
-    // font-size: 1.181vw;
     font-size: clamp(100%, 1rem + 1vw, 1.33em);
     font-size: 1rem;
 }
@@ -380,17 +410,16 @@
 }
 
 @mixin label() {
-    font-family: $font-header;
-    font-size: $font-h5;
+    display: block;
+    margin: 0;
+    font-family: $font-body;
+    font-size: $font-base;
     font-weight: $font-bold;
     line-height: 1em;
-    text-transform: uppercase;
-    margin: 0;
 }
 
 @mixin caption() {
     margin: 0;
-    // font-size: 1.15vw;
     font-size: 0.875em;
     font-family: $font-header;
     font-weight: $font-bold;
@@ -427,8 +456,6 @@
         float: left;
         font-family: $font-header;
         font-size: 3.25em;
-        // font-size: 3.375em;
-        // font-size: 2em;
         font-size: 5.5em;
         line-height: 0.9em;
         color: $yellow;
@@ -513,7 +540,7 @@
 
 @mixin underline-link() {
     border-bottom: 3px $black solid;
-    font-weight: 700;
+    font-weight: $font-bold;
     padding-left: $small-spacing;
     padding-right: $small-spacing;
     padding-bottom: .25em;
@@ -550,11 +577,17 @@
         z-index: -1;
     }
 
-    @include hocus {
+    &:hover {
         &::before {
             transform: scaleX(1);
             transform-origin: left;
         }
+    }
+
+    &:focus {
+        border-radius: $border-radius;
+        outline: $focus-outline;
+        outline-offset: $focus-offset;
     }
 }
 
@@ -632,5 +665,15 @@
     .c-media__svg {
         position: relative;
         transition: $speed-slow $bezier-back;
+    }
+
+    &:focus {
+        border-radius: $border-radius;
+        outline: $focus-outline;
+        outline-offset: $focus-offset;
+
+        &::before {
+            background-color: fade-out($yellow, 0.85);
+        }
     }
 }
