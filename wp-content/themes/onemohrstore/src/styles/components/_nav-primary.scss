@@ -87,6 +87,7 @@
         // flex-wrap: wrap;
         column-gap: $gutter-xs;
         padding: 0;
+        overflow: visible !important;
 
         &.is-hidden {
             position: static;
@@ -119,6 +120,10 @@
 .c-navigation__menuItem {
     @include heading();
     flex: 1 1 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.25em;
     font-family: $font-header;
     font-weight: $font-bold;
     line-height: $line-height;
@@ -148,7 +153,7 @@
     }
 
     .c-media__svg {
-        display: none;
+        // display: none;
         width: 0.75em;
         height: 0.75em;
     }
@@ -169,7 +174,7 @@
     // screen at or above 1200px
     @include media(">=large") {
         flex: 0 1 auto;
-        margin-right: 0.5em;
+        margin-left: 0.5em;
         font-size: $font-h6;
         font-weight: $font-heavy;
         letter-spacing: rem(1.5px);

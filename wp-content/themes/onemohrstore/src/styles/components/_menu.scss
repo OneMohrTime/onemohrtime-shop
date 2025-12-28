@@ -23,16 +23,3 @@
         flex-basis: auto;
     }
 }
-
-/**
- * === DROPDOWNS ===
- */
-
-.c-submenu {
-    position: relative;
-
-    // screen at or above 900px
-    @include media(">=medium") {
-        position: absolute;
-    }
-}

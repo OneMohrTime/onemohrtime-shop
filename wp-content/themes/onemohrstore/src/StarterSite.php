@@ -15,7 +15,6 @@ class StarterSite extends Site {
         // add_action('init', array($this, 'register_post_types'));
         // add_action('init', array($this, 'register_taxonomies'));
         add_action('wp_enqueue_scripts', array($this, 'load_scripts'));
-        add_action('widgets_init', array($this, 'create_sidebars'));
         add_action('pre_get_posts', array($this, 'custom_category_query_vars'));
         add_action('woocommerce_product_query', [$this, 'filter_products_by_category']);
 
@@ -173,28 +172,9 @@ class StarterSite extends Site {
     public function navigation_menus() {
         register_nav_menus([
             'primary' => 'Primary Navigation',
-            'mega1' => 'MegaMenu Column 1',
-            'mega2' => 'MegaMenu Column 2',
-            'mega3' => 'MegaMenu Column 3',
-            'mega4' => 'MegaMenu Column 4',
-            'mega5' => 'MegaMenu Column 5',
             'utility' => 'Utility Navigation',
             'footer' => 'Footer Navigation',
         ]);
-    }
-
-    /**
-     * Create a global site sidebar
-     */
-    public function create_sidebars() {
-        register_sidebar( array(
-            'name' => 'Global Sidebar',
-            'id' => 'globalSidebar',
-            'before_widget' => '<div class="c-widget">',
-            'after_widget' => '</div>',
-            'before_title' => '<h3 class="u-heading">',
-            'after_title' => '</h3>',
-        ) );
     }
 
     /**
@@ -213,7 +193,6 @@ class StarterSite extends Site {
         $context['site']          = $this;
         $context['homePage']      = is_front_page();
         $context['globals']       = get_fields('option');
-        $context['globalSidebar'] = dynamic_sidebar('global_sidebar');
 
         $custom_logo_url = wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' );
         $context['siteLogo'] = $custom_logo_url;
@@ -221,11 +200,6 @@ class StarterSite extends Site {
         $context['woocart'] = WC()->cart;
 
         $context['primaryMenu'] = Timber::get_menu('primary');
-        $context['menuColumn1'] = Timber::get_menu('mega1');
-        $context['menuColumn2'] = Timber::get_menu('mega2');
-        $context['menuColumn3'] = Timber::get_menu('mega3');
-        $context['menuColumn4'] = Timber::get_menu('mega4');
-        $context['menuColumn5'] = Timber::get_menu('mega5');
         $context['utilityMenu'] = Timber::get_menu('utility');
         $context['footerMenu']  = Timber::get_menu('footer');
 
