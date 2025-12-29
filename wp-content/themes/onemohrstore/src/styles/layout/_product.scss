@@ -330,6 +330,11 @@
                 @include label();
                 margin-bottom: 0.5em
             }
+
+            textarea:focus {
+                outline: $focus-outline;
+                outline-offset: $focus-offset;
+            }
         }
 
         .form-submit {

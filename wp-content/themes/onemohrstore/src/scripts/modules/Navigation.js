@@ -23,6 +23,8 @@ export default class extends es6Module {
     this.search = null;
     this.toggleMenu = null;
     this.searchForm = null;
+    this.overlay = null;
+    this.activeMenu = null;
   }
 
   // Init module
@@ -35,6 +37,7 @@ export default class extends es6Module {
     this.search     = this.header.querySelector('.c-navigation__search button');
     this.toggleMenu = this.header.querySelector('.c-navigation__toggle');
     this.searchForm = this.header.querySelector('.o-header__search');
+    this.overlay    = document.querySelector('.o-site__overlay');
 
     // Functions
     this.handleScroll();
@@ -47,9 +50,6 @@ export default class extends es6Module {
 
         // Open primary navigation
         this.togglePrimaryNav();
-        this.handleMobileDropdowns();
-        // Mega menu support
-        this.handleMegaMenu();
       });
     }
 
@@ -63,6 +63,169 @@ export default class extends es6Module {
       });
     }
 
+    // Setup menu interactions
+    this.setupMenuInteractions();
+
+    // Setup overlay interaction
+    if (this.overlay) {
+      this.overlay.addEventListener('click', () => this.closeAllMenus());
+    }
+
+  }
+
+  // Setup Menu Interactions
+  // =========================================================================
+  setupMenuInteractions() {
+    // Handle mega menu triggers
+    const megaMenuTriggers = this.header.querySelectorAll('[data-trigger-megamenu]');
+    megaMenuTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.toggleMegaMenu(trigger);
+      });
+    });
+
+    // Handle submenu triggers
+    const submenuTriggers = this.header.querySelectorAll('[data-trigger-submenu]');
+    submenuTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.toggleSubmenu(trigger);
+      });
+    });
+
+    // Close menus when pressing Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeAllMenus();
+      }
+    });
+  }
+
+  // Toggle Mega Menu
+  // =========================================================================
+  toggleMegaMenu(trigger) {
+    const menuItem = trigger.closest('.c-navigation__menuItem');
+    const megaMenu = trigger.parentElement.querySelector('.c-mega-menu');
+    if (!megaMenu) return;
+
+    const isOpen = megaMenu.classList.contains('is-visible');
+
+    if (!isOpen) {
+      // Close all other menus
+      this.closeAllMenus();
+      // Open this menu
+      megaMenu.classList.remove('is-hidden');
+      megaMenu.classList.add('is-visible');
+      megaMenu.setAttribute('aria-hidden', 'false');
+      trigger.setAttribute('aria-expanded', 'true');
+      if (menuItem) {
+        menuItem.classList.add('is-active');
+      }
+      this.showOverlay();
+      this.activeMenu = megaMenu;
+    } else {
+      // Close this menu
+      megaMenu.classList.add('is-hidden');
+      megaMenu.classList.remove('is-visible');
+      megaMenu.setAttribute('aria-hidden', 'true');
+      trigger.setAttribute('aria-expanded', 'false');
+      if (menuItem) {
+        menuItem.classList.remove('is-active');
+      }
+      this.hideOverlay();
+      this.activeMenu = null;
+    }
+  }
+
+  // Toggle Submenu
+  // =========================================================================
+  toggleSubmenu(trigger) {
+    const menuItem = trigger.closest('.c-navigation__menuItem');
+    const targetId = trigger.getAttribute('data-toggle');
+    const submenu = this.header.querySelector(`#${targetId}`);
+    if (!submenu) return;
+
+    const isOpen = submenu.classList.contains('is-visible');
+
+    if (!isOpen) {
+      // Close all other menus
+      this.closeAllMenus();
+      // Open this menu
+      submenu.classList.remove('is-hidden');
+      submenu.classList.add('is-visible');
+      submenu.setAttribute('aria-hidden', 'false');
+      if (menuItem) {
+        menuItem.classList.add('is-active');
+      }
+      this.showOverlay();
+      this.activeMenu = submenu;
+    } else {
+      // Close this menu
+      submenu.classList.add('is-hidden');
+      submenu.classList.remove('is-visible');
+      submenu.setAttribute('aria-hidden', 'true');
+      if (menuItem) {
+        menuItem.classList.remove('is-active');
+      }
+      this.hideOverlay();
+      this.activeMenu = null;
+    }
+  }
+
+  // Close All Menus
+  // =========================================================================
+  closeAllMenus() {
+    // Close all mega menus
+    const megaMenus = this.header.querySelectorAll('.c-mega-menu');
+    megaMenus.forEach((menu) => {
+      menu.classList.remove('is-visible');
+      menu.classList.add('is-hidden');
+      menu.setAttribute('aria-hidden', 'true');
+    });
+
+    // Close all submenus
+    const submenus = this.header.querySelectorAll('.c-submenu');
+    submenus.forEach((menu) => {
+      menu.classList.remove('is-visible');
+      menu.classList.add('is-hidden');
+      menu.setAttribute('aria-hidden', 'true');
+    });
+
+    // Reset aria-expanded on all triggers
+    const allTriggers = this.header.querySelectorAll('[data-trigger-megamenu], [data-trigger-submenu]');
+    allTriggers.forEach((trigger) => {
+      trigger.setAttribute('aria-expanded', 'false');
+    });
+
+    // Remove is-active class from all menu items
+    const allMenuItems = this.header.querySelectorAll('.c-navigation__menuItem');
+    allMenuItems.forEach((item) => {
+      item.classList.remove('is-active');
+    });
+
+    this.hideOverlay();
+    this.activeMenu = null;
+  }
+
+  // Show Overlay
+  // =========================================================================
+  showOverlay() {
+    if (this.overlay) {
+      this.overlay.classList.remove('is-hidden');
+      this.overlay.classList.add('is-visible');
+      this.overlay.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  // Hide Overlay
+  // =========================================================================
+  hideOverlay() {
+    if (this.overlay) {
+      this.overlay.classList.add('is-hidden');
+      this.overlay.classList.remove('is-visible');
+      this.overlay.setAttribute('aria-hidden', 'true');
+    }
   }
 
   // Handle Scroll
@@ -131,84 +294,7 @@ export default class extends es6Module {
     });
   }
 
-  // Mega Menu Accessibility Toggle
-  // =========================================================================
-  handleMegaMenu() {
-    const triggers = this.header.querySelectorAll('[data-trigger-megamenu]');
 
-    triggers.forEach((trigger) => {
-      const menu = trigger.parentElement.querySelector('.c-mega-menu');
-      let hideTimeout;
-
-      const showMenu = () => {
-        clearTimeout(hideTimeout);
-        if (menu) {
-          menu.classList.add('is-visible');
-          menu.classList.remove('is-hidden');
-          menu.setAttribute('aria-hidden', 'false');
-          trigger.setAttribute('aria-expanded', 'true');
-        }
-      };
-
-      const hideMenu = () => {
-        clearTimeout(hideTimeout);
-        hideTimeout = setTimeout(() => {
-          if (menu) {
-            menu.classList.remove('is-visible');
-            menu.classList.add('is-hidden');
-            menu.setAttribute('aria-hidden', 'true');
-            trigger.setAttribute('aria-expanded', 'false');
-          }
-        }, 150); // debounce delay
-      };
-
-      // // Hover
-      // trigger.parentElement.addEventListener('mouseenter', showMenu);
-      // trigger.parentElement.addEventListener('mouseleave', hideMenu);
-
-      // Keyboard focus
-      trigger.addEventListener('focus', showMenu);
-      trigger.addEventListener('blur', hideMenu);
-
-      // // Add mobile click toggle
-      // trigger.addEventListener('click', (e) => {
-      //   const isMobile = window.innerWidth < 768;
-      //   if (!isMobile) return;
-
-      //   const menu = trigger.parentElement.querySelector('.c-mega-menu');
-
-      //   if (menu) {
-      //     e.preventDefault();
-
-      //     const isOpen = menu.classList.contains('is-visible');
-
-      //     // Close all others first (optional)
-      //     const allMenus = this.header.querySelectorAll('.c-mega-menu');
-      //     const allTriggers = this.header.querySelectorAll('[data-trigger-megamenu]');
-      //     allMenus.forEach(m => m.classList.remove('is-visible', 'is-hidden'));
-      //     allTriggers.forEach(t => t.setAttribute('aria-expanded', 'false'));
-
-      //     if (!isOpen) {
-      //       menu.classList.add('is-visible');
-      //       menu.classList.remove('is-hidden');
-      //       menu.setAttribute('aria-hidden', 'false');
-      //       trigger.setAttribute('aria-expanded', 'true');
-      //     }
-      //   }
-      // });
-
-      // Optional: Close on ESC
-      if (menu) {
-        menu.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            clearTimeout(hideTimeout);
-            hideMenu();
-            trigger.focus();
-          }
-        });
-      }
-    })
-  }
 
   // Toggle Primary Nav
   // =========================================================================
@@ -223,8 +309,13 @@ export default class extends es6Module {
     this.toggleMenu.classList.toggle('open');
     siteContainer.classList.toggle('-activeNavigationAreaUpTopButNotWhenScrolling');
 
-    // On open: collapse all megamenus
-    if (!this.header.classList.contains('is-active')) {
+    // Check if menu is now open or closed
+    if (this.header.classList.contains('is-active')) {
+      // Menu is open - show overlay
+      this.showOverlay();
+    } else {
+      // Menu is closed - hide overlay and close all submenus
+      this.hideOverlay();
       const allMegamenus = this.header.querySelectorAll('.c-mega-menu');
       const allTriggers = this.header.querySelectorAll('[data-trigger-megamenu]');
 
@@ -240,48 +331,7 @@ export default class extends es6Module {
     }
   }
 
-  // Mobile Dropdown Submenus Toggle
-  // =========================================================================
-  handleMobileDropdowns() {
-    const isMobile = () => window.innerWidth < 768;
-    const toggles = this.header.querySelectorAll('[data-toggle^="primary__sub-"]');
 
-    toggles.forEach((toggle) => {
-      const targetId = toggle.getAttribute('data-toggle');
-      const targetMenu = this.header.querySelector(`#${targetId}`);
-
-      // Safety check
-      if (!targetMenu) return;
-
-      // Attach click listener
-      toggle.addEventListener('click', (e) => {
-        if (!isMobile()) return;
-
-        e.preventDefault();
-
-        const isOpen = targetMenu.classList.contains('is-visible');
-
-        // Optional: Close all other submenus
-        const allSubmenus = this.header.querySelectorAll('.c-submenu');
-        allSubmenus.forEach((submenu) => {
-          submenu.classList.remove('is-visible');
-          submenu.classList.add('is-hidden');
-          submenu.setAttribute('aria-hidden', 'true');
-        });
-
-        // Toggle current
-        if (!isOpen) {
-          targetMenu.classList.add('is-visible');
-          targetMenu.classList.remove('is-hidden');
-          targetMenu.setAttribute('aria-hidden', 'false');
-        } else {
-          targetMenu.classList.remove('is-visible');
-          targetMenu.classList.add('is-hidden');
-          targetMenu.setAttribute('aria-hidden', 'true');
-        }
-      });
-    });
-  }
 
   // Search Form Toggle
   // =========================================================================

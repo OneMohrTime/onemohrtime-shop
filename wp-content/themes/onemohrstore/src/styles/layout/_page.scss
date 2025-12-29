@@ -194,6 +194,11 @@
     .orderby {
         line-height: $heading-height;
     }
+
+    select:focus {
+        outline: $focus-outline;
+        outline-offset: $focus-offset;
+    }
 }
 
 .woocommerce-pagination {
