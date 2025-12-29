@@ -43,8 +43,8 @@ $borders: 2px solid $white--darker;
 
             .wc-block-components-quantity-selector {
                 margin: 0 0 $small-spacing;
-                border: 2px solid $white--darkest;
-                border-radius: $border-radius;
+                // border: 2px solid $white--darkest;
+                // border-radius: $border-radius;
 
                 & > .wc-block-components-quantity-selector__button--minus,
                 & > .wc-block-components-quantity-selector__button--plus {
@@ -149,6 +149,15 @@ $borders: 2px solid $white--darker;
     }
 
     // Elements
+    .wc-block-components-totals-coupon__form {
+        input[type=text],
+        button {
+            &:focus {
+                outline: $focus-outline;
+                outline-offset: $focus-offset;
+            }
+        }
+    }
     .wc-block-components-button.wc-block-components-totals-coupon__button,
     .wc-block-components-button.wc-block-cart__submit-button {
         @include btn-style();
