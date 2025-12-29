@@ -3,12 +3,8 @@
 ========================================================================== */
 
 .o-site__header {
-
-    // screen at or above 900px
-    @include media(">=medium") {}
-
-    // screen at or above 1200px
-    @include media(">=large") {}
+    position: relative;
+    z-index: 200;
 
     // screen below 599px
     @include media("<small") {
@@ -17,7 +13,6 @@
         display: flex;
         flex-direction: column-reverse;
         width: 100%;
-        z-index: 100;
     }
 }
 

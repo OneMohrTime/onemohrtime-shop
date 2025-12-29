@@ -108,7 +108,14 @@ body {
     &.is-visible {
         display: block;
         pointer-events: auto;
-        z-index: 199;
+        z-index: 11;
+    }
+
+    // screen at or above 900px
+    @include media(">=medium") {
+        &.is-visible {
+            z-index: 199;
+        }
     }
 }
 
