@@ -14,6 +14,30 @@
 
     <article itemscope itemtype="https://schema.org/Product" class="o-page c-product {{ post.class }}">
 
+        {# Product Schema Metadata #}
+        <meta itemprop="name" content="{{ post.title }}" />
+        <meta itemprop="url" content="{{ post.link }}" />
+        {% if post.thumbnail %}
+            <meta itemprop="image" content="{{ post.thumbnail.src }}" />
+        {% endif %}
+        
+        {% if post.meta('_wc_review_count') %}
+            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                <meta itemprop="ratingValue" content="{{ post.meta('_wc_average_rating') }}" />
+                <meta itemprop="reviewCount" content="{{ post.meta('_wc_review_count') }}" />
+            </div>
+        {% endif %}
+
+        {% if post.meta('_price') %}
+            <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                <meta itemprop="priceCurrency" content="{{ fn('get_woocommerce_currency') }}" />
+                <meta itemprop="price" content="{{ post.meta('_price')|replace({',': ''}) }}" />
+                <meta itemprop="url" content="{{ post.link }}" />
+                {% set stock_status = post.meta('_stock_status') %}
+                <meta itemprop="availability" content="https://schema.org/{% if stock_status == 'instock' %}InStock{% else %}OutOfStock{% endif %}" />
+            </div>
+        {% endif %}
+
         <div class="c-product__images">
             {% do action('woocommerce_before_single_product_summary') %}
         </div>
@@ -23,8 +47,6 @@
         </div>
 
         {% do action('woocommerce_after_single_product_summary') %}
-
-        <meta itemprop="url" content="{{ post.link }}" />
 
     </article>
 
