@@ -20,7 +20,7 @@
         {% if post.thumbnail %}
             <meta itemprop="image" content="{{ post.thumbnail.src }}" />
         {% endif %}
-        
+
         {% if post.meta('_wc_review_count') %}
             <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                 <meta itemprop="ratingValue" content="{{ post.meta('_wc_average_rating') }}" />
@@ -50,7 +50,7 @@
 
     </article>
 
-    {# {% include '_components/tease-product.twig' with {
+    {# {% include '_components/tease--product.twig' with {
         products: related_products
     } %} #}
 

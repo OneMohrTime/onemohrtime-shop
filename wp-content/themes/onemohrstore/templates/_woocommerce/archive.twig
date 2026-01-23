@@ -44,7 +44,7 @@
         {% if products %}
             <div class="c-grid is-products">
                 {% for post in products %}
-                    {% include '_components/tease-product.twig' with {
+                    {% include '_components/tease--product.twig' with {
                         product: {
                             ID: post.id,
                             title: post.title,
