@@ -12,7 +12,7 @@
     {% for row in this.sections %}
         {# Use flexible content block based on section handle #}
         {% set layout = row.acf_fc_layout %}
-        {% include '_components/section-' ~ layout ~ '.twig' with {
+        {% include '_components/section--' ~ layout ~ '.twig' with {
             params: {
                 section: row,
                 alignment: loop.index is even ? ' is-reversed' : '',
