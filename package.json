@@ -46,6 +46,7 @@
     "@fancyapps/ui": "^5.0.36",
     "@floating-ui/dom": "^1.6.13",
     "bourbon": "^7.3.0",
+    "browserify": "^17.0.1",
     "caniuse-lite": "^1.0.30001731",
     "css-reset-and-normalize": "^2.3.6",
     "family.scss": "^1.0.8",
