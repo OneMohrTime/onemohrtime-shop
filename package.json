@@ -1,6 +1,6 @@
 {
   "name": "timber-wordpress-webpack",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "author": {
     "name": "Derek Mohr",
@@ -9,14 +9,12 @@
   },
   "main": "index.php",
   "scripts": {
-    "dev": "npm run development",
-    "development": "npx mix",
-    "watch": "npx mix watch",
-    "watch-poll": "npx mix watch -- --watch-options-poll=1000",
-    "hot": "npx mix watch --hot",
-    "build": "npm run production",
-    "prod": "npm run production",
-    "production": "npx mix --production"
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "development": "vite build",
+    "prod": "vite build",
+    "production": "vite build",
+    "watch": "vite build --watch"
   },
   "browserslist": [
     "last 5 versions",
@@ -35,19 +33,13 @@
     "node": "24"
   },
   "devDependencies": {
-    "browser-sync": "^3.0.2",
-    "browser-sync-webpack-plugin": "^2.3.0",
-    "laravel-mix": "^6.0.49",
-    "laravel-mix-imagemin": "^1.0.3",
-    "sass": "^1.77.6",
-    "sass-loader": "^12.6.0"
+    "sass": "^1.97.3",
+    "vite": "^7.3.1",
+    "vite-plugin-static-copy": "^3.1.6"
   },
   "dependencies": {
     "@fancyapps/ui": "^5.0.36",
-    "@floating-ui/dom": "^1.6.13",
     "bourbon": "^7.3.0",
-    "browserify": "^17.0.1",
-    "caniuse-lite": "^1.0.30001731",
     "css-reset-and-normalize": "^2.3.6",
     "family.scss": "^1.0.8",
     "gsap": "^3.12.5",
@@ -55,7 +47,6 @@
     "modujs": "^1.4.2",
     "modularload": "^1.2.8",
     "modularscroll": "^1.0.7",
-    "swiper": "^11.1.4",
-    "tippy.js": "^6.3.7"
+    "swiper": "^11.2.8"
   }
 }
