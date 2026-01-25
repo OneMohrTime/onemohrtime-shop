@@ -150,6 +150,7 @@ class StarterSite extends Site {
     public function load_scripts() {
         // Main "screen" stylesheet
         wp_enqueue_style( 'main', get_template_directory_uri() . '/assets/css/app.css', array(), null, 'screen' );
+        wp_enqueue_style( 'app', get_template_directory_uri() . '/assets/css/app2.css', array(), null, 'screen' );
 
         // Google Webfonts
         wp_enqueue_style( 'fonts', 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap', array(), null, 'screen' );
