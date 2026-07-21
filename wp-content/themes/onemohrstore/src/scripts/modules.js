@@ -22,3 +22,4 @@ export { default as Parallax } from './modules/Parallax';
 // export { default as SwiperQuotes } from './modules/SwiperQuotes';
 // export { default as SwiperSlides } from './modules/SwiperSlides';
 // export { default as SwiperTestimonials } from './modules/SwiperTestimonials';
+export { default as SwiperThumbnails } from './modules/SwiperThumbnails';
