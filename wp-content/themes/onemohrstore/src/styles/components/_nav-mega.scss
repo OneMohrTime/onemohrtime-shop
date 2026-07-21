@@ -65,11 +65,9 @@
     }
 
     .c-card__text {
+        @include price();
+        display: block;
         margin-bottom: $gutter-sm;
-        font-family: $font-body;
-        font-weight: $font-regular;
-        text-transform: none;
-        letter-spacing: normal;
     }
 
     .c-button.is-primary {
