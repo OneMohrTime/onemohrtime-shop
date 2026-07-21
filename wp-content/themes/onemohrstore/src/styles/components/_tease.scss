@@ -56,10 +56,8 @@
     }
 
     .price {
+        @include price();
         display: block;
-        font-size: $font-base-sm;
-        font-weight: $font-bold;
-        line-height: $heading-height;
         color: $black--lightest;
     }
 

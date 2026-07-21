@@ -4,6 +4,8 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const themePath = path.resolve("wp-content/themes/onemohrstore");
 
+const isProd = process.env.NODE_ENV === "production";
+
 export default defineConfig({
   root: themePath,
   base: "./",
@@ -20,12 +22,12 @@ export default defineConfig({
         styles: path.resolve(themePath, "src/styles/app.scss"),
       },
       output: {
-        entryFileNames: "js/app.js",
+        entryFileNames: isProd ? "js/app.[hash].js" : "js/app.js",
         assetFileNames: (assetInfo) => {
           if (assetInfo.name?.endsWith(".css")) {
-            return "css/app.css";
+            return isProd ? "css/app.[hash].css" : "css/app.css";
           }
-          return "img/[name][extname]";
+          return "images/[name][extname]";
         },
       },
     },

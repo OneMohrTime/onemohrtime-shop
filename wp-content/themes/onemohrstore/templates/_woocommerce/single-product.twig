@@ -22,14 +22,14 @@
         {% endif %}
 
         {% if post.meta('_wc_review_count') %}
-            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+            <div class="u-screen-reader-text" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                 <meta itemprop="ratingValue" content="{{ post.meta('_wc_average_rating') }}" />
                 <meta itemprop="reviewCount" content="{{ post.meta('_wc_review_count') }}" />
             </div>
         {% endif %}
 
         {% if post.meta('_price') %}
-            <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+            <div class="u-screen-reader-text" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <meta itemprop="priceCurrency" content="{{ fn('get_woocommerce_currency') }}" />
                 <meta itemprop="price" content="{{ post.meta('_price')|replace({',': ''}) }}" />
                 <meta itemprop="url" content="{{ post.link }}" />
@@ -39,7 +39,79 @@
         {% endif %}
 
         <div class="c-product__images">
-            {% do action('woocommerce_before_single_product_summary') %}
+            {% if post.thumbnail or post.meta('_product_image_gallery') %}
+                <div class="c-product-gallery" data-product-id="{{ post.id }}">
+                    {# Main carousel with Swiper #}
+                    <div class="swiper is-product-gallery" data-module-swiper-thumbnails>
+                        <div class="swiper-wrapper" data-module-fancybox="product-gallery">
+                            {# Main product image #}
+                            {% if post.thumbnail %}
+                                <div class="swiper-slide">
+                                    <a href="{{ post.thumbnail.src('full') }}" data-fancybox="product-gallery" data-caption="{{ post.title }}">
+                                        {% include '_elements/picture.twig' with {
+                                            params: {
+                                                src: post.thumbnail,
+                                            },
+                                        } only %}
+                                    </a>
+                                </div>
+                            {% endif %}
+
+                            {% set gallery_images = post.meta('_product_image_gallery') %}
+                            {% if gallery_images %}
+                                {% for image_id in gallery_images|split(',') %}
+                                    {% if image_id %}
+                                        {% set image = get_image(image_id) %}
+                                        <div class="swiper-slide">
+                                            <a href="{{ image.src('full') }}" data-fancybox="product-gallery" data-caption="{{ post.title }}">
+                                                {% include '_elements/picture.twig' with {
+                                                    params: {
+                                                        src: image,
+                                                    },
+                                                } only %}
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        {# Navigation arrows #}
+                        <div class="swiper-controls">
+                            <button class="c-button is-prev">
+                                <span class="u-screen-reader-text">Previous</span>
+                                {{ source('_elements/svg/arrow-left.svg') }}
+                            </button>
+                            <button class="c-button is-next">
+                                <span class="u-screen-reader-text">Next</span>
+                                {{ source('_elements/svg/arrow-right.svg') }}
+                            </button>
+                        </div>
+                    </div>
+
+                    {# Thumbnail carousel #}
+                    <div class="swiper is-product-thumbs" data-swiper-thumbs>
+                        <div class="swiper-wrapper">
+                            {% if post.thumbnail %}
+                                <div class="swiper-slide">
+                                    <img src="{{ post.thumbnail.src('thumbnail') }}" alt="{{ post.title }}" />
+                                </div>
+                            {% endif %}
+
+                            {% if gallery_images %}
+                                {% for image_id in gallery_images|split(',') %}
+                                    {% if image_id %}
+                                        {% set image = get_image(image_id) %}
+                                        <div class="swiper-slide">
+                                            <img src="{{ image.src('thumbnail') }}" alt="{{ post.title }}" />
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
 
         <div class="c-product__summary">

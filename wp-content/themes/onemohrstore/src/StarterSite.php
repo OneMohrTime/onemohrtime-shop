@@ -148,17 +148,60 @@ class StarterSite extends Site {
      * This is where you load the frontend CSS & JS files
      */
     public function load_scripts() {
-        // Main "screen" stylesheet
-        wp_enqueue_style( 'main', get_template_directory_uri() . '/assets/css/app.css', array(), null, 'screen' );
-        wp_enqueue_style( 'app', get_template_directory_uri() . '/assets/css/app2.css', array(), null, 'screen' );
+        // Try to load Vite manifest (production hashed filenames)
+        $manifest_paths = [
+            get_template_directory() . '/assets/.vite/manifest.json',
+            get_template_directory() . '/assets/manifest.json',
+        ];
+
+        $manifest = [];
+        foreach ($manifest_paths as $mp) {
+            if (file_exists($mp)) {
+                $decoded = json_decode(file_get_contents($mp), true);
+                if (is_array($decoded)) {
+                    $manifest = $decoded;
+                    break;
+                }
+            }
+        }
+
+        $assets_url = get_template_directory_uri() . '/assets/';
+
+        // Resolve JS file (manifest entry for src/scripts/app.js)
+        $js_path = isset($manifest['src/scripts/app.js']['file'])
+            ? $assets_url . $manifest['src/scripts/app.js']['file']
+            : $assets_url . 'js/app.js';
+
+        // Resolve CSS files: prefer CSS listed under the script entry, and also the styles entry
+        $css_files = [];
+        if (!empty($manifest['src/scripts/app.js']['css']) && is_array($manifest['src/scripts/app.js']['css'])) {
+            foreach ($manifest['src/scripts/app.js']['css'] as $c) {
+                $css_files[] = $assets_url . ltrim($c, '/');
+            }
+        }
+        if (isset($manifest['src/styles/app.scss']['file'])) {
+            $css_files[] = $assets_url . ltrim($manifest['src/styles/app.scss']['file'], '/');
+        }
+
+        // Fallbacks if manifest didn't contain any CSS
+        if (empty($css_files)) {
+            $css_files[] = $assets_url . 'css/app.css';
+            $css_files[] = $assets_url . 'css/app2.css';
+        }
+
+        // Enqueue resolved CSS files (unique)
+        $css_files = array_values(array_unique($css_files));
+        foreach ($css_files as $i => $css_file) {
+            wp_enqueue_style( 'main' . ($i ? "-{$i}" : ''), $css_file, array(), null, 'screen' );
+        }
 
         // Google Webfonts
-        wp_enqueue_style( 'fonts', 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap', array(), null, 'screen' );
+        wp_enqueue_style('fonts', 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap', array(), null, 'screen');
 
-        // Main script file
-        wp_enqueue_script( 'main', get_template_directory_uri() . '/assets/js/app.js', array(), null, true );
+        // Enqueue JS
+        wp_enqueue_script( 'main', $js_path, array(), null, true );
 
-         // Filter to add defer attribute to the main script
+        // Filter to add defer attribute to the main script
         add_filter( 'script_loader_tag', function( $tag, $handle ) {
             if ( 'main' !== $handle ) {
                 return $tag; // Only modify the 'main' script

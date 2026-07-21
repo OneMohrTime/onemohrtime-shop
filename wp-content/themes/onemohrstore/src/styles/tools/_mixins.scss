@@ -386,6 +386,14 @@
     }
 }
 
+@mixin price() {
+    font-family: $font-body;
+    font-size: $font-base-sm;
+    font-weight: $font-bold;
+    text-transform: none;
+    line-height: $heading-height;
+}
+
 @mixin body-copy($underline: null) {
     @include type();
     margin: 0 0 math.div($line-height, 2);

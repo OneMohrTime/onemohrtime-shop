@@ -44,6 +44,17 @@
 
         .search-field {
             flex: 1 0 auto;
+            transition: border-color $speed $bezier-slide,
+                        background-color $speed $bezier-slide;
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            border-radius: 0;
+            background-color: transparent;
+
+            &:hover {
+                background-color: $white;
+            }
 
             &:focus {
                 border-color: $black;
@@ -60,12 +71,6 @@
     // screen at or above 600px
     @include media(">=small") {
         background-color: $white--dark;
-    }
-
-
-    // screen at or above 900px
-    @include media(">=medium") {
-        background-color: $white--darker;
     }
 
     // screen at or above 1500px
