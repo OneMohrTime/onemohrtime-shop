@@ -22,14 +22,14 @@
         {% endif %}
 
         {% if post.meta('_wc_review_count') %}
-            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+            <div class="u-screen-reader-text" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                 <meta itemprop="ratingValue" content="{{ post.meta('_wc_average_rating') }}" />
                 <meta itemprop="reviewCount" content="{{ post.meta('_wc_review_count') }}" />
             </div>
         {% endif %}
 
         {% if post.meta('_price') %}
-            <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+            <div class="u-screen-reader-text" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <meta itemprop="priceCurrency" content="{{ fn('get_woocommerce_currency') }}" />
                 <meta itemprop="price" content="{{ post.meta('_price')|replace({',': ''}) }}" />
                 <meta itemprop="url" content="{{ post.link }}" />
