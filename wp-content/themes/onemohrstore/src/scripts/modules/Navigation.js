@@ -23,6 +23,7 @@ export default class extends es6Module {
     this.search = null;
     this.toggleMenu = null;
     this.searchForm = null;
+    this.searchInput = null;
     this.overlay = null;
     this.activeMenu = null;
   }
@@ -37,6 +38,7 @@ export default class extends es6Module {
     this.search     = this.header.querySelector('.c-navigation__search button');
     this.toggleMenu = this.header.querySelector('.c-navigation__toggle');
     this.searchForm = this.header.querySelector('.o-header__search');
+    this.searchInput = this.searchForm?.querySelector('.search-field');
     this.overlay    = document.querySelector('.o-site__overlay');
 
     // Functions
@@ -112,8 +114,10 @@ export default class extends es6Module {
     const isOpen = megaMenu.classList.contains('is-visible');
 
     if (!isOpen) {
-      // Close all other menus
+      // Close all other menus and search
       this.closeAllMenus();
+      this.searchForm.classList.add('is-hidden');
+      this.searchForm.classList.remove('is-visible');
       // Open this menu
       megaMenu.classList.remove('is-hidden');
       megaMenu.classList.add('is-visible');
@@ -149,8 +153,10 @@ export default class extends es6Module {
     const isOpen = submenu.classList.contains('is-visible');
 
     if (!isOpen) {
-      // Close all other menus
+      // Close all other menus and search
       this.closeAllMenus();
+      this.searchForm.classList.add('is-hidden');
+      this.searchForm.classList.remove('is-visible');
       // Open this menu
       submenu.classList.remove('is-hidden');
       submenu.classList.add('is-visible');
@@ -336,8 +342,13 @@ export default class extends es6Module {
   // Search Form Toggle
   // =========================================================================
   toggleSearch() {
+    this.closeAllMenus();
     this.searchForm.classList.toggle('is-hidden');
     this.searchForm.classList.toggle('is-visible');
+
+    if (this.searchForm.classList.contains('is-visible')) {
+      this.searchInput?.focus();
+    }
   }
 
   // Destroy
