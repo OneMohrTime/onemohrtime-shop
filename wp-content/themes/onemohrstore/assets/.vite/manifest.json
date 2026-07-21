@@ -1,15 +1,15 @@
 {
   "src/scripts/app.js": {
-    "file": "js/app.js",
+    "file": "js/app.KtSF3vcW.js",
     "name": "app",
     "src": "src/scripts/app.js",
     "isEntry": true,
     "css": [
-      "css/app.css"
+      "css/app.CzbqR_N4.css"
     ]
   },
   "src/styles/app.scss": {
-    "file": "css/app2.css",
+    "file": "css/app.D3gowi-8.css",
     "src": "src/styles/app.scss",
     "isEntry": true,
     "name": "styles",
